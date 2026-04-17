@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Tokyo Trip 2026 🌸</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══ SAKURA + MUSTARD DESIGN TOKENS ═══ */
+:root {
+  --sakura:      #F2A7C3;
+  --sakura-lt:   #FAD4E4;
+  --sakura-pale: #FEF0F6;
+  --sakura-dk:   #D4708A;
+  --mustard:     #E8B84B;
+  --mustard-lt:  #F5D98A;
+  --mustard-pale:#FFFBE8;
+  --mustard-dk:  #C49A2A;
+  --sage:        #8AB87A;
+  --sage-lt:     #C4E0BA;
+  --lavender:    #C4B4E4;
+  --cream:       #FFF8F2;
+  --warm-white:  #FFFCF8;
+  --bg:          #FFF8F2;
+  --bg2:         #FFF3EC;
+  --card:        #FFFFFF;
+  --card-hover:  #FFFBF8;
+  --border:      rgba(242,167,195,0.28);
+  --border-hov:  rgba(232,184,75,0.45);
+  --tx1:         #3A2830;
+  --tx2:         #7A5A65;
+  --tx3:         #BBA5AD;
+  --tx-inv:      #FFFFFF;
+  --shadow:      0 4px 20px rgba(210,120,150,0.10);
+  --shadow-hov:  0 8px 32px rgba(210,120,150,0.18);
+  --r-sm: 10px; --r-md: 16px; --r-lg: 22px; --r-xl: 30px; --r-pill: 999px;
+  --t: .22s;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:'Sarabun','Noto Sans JP',sans-serif;
+  background: var(--bg);
+  color: var(--tx1);
+  font-size:14px;
+  line-height:1.65;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ─── background petal pattern ─── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(242,167,195,.12) 0%, transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(232,184,75,.10) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(196,180,228,.06) 0%, transparent 60%);
+  pointer-events:none;z-index:0;
+}
+
+/* ─── top stripe ─── */
+body::after{
+  content:'';
+  position:fixed;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--sakura),var(--mustard),var(--sakura-lt));
+  z-index:300;
+}
+
+.app{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:0 14px 80px;}
+
+/* ═══ NAV ═══ */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,248,242,.92);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1.5px solid var(--border);
+  margin:0 -14px;
+  padding:0 14px;
+}
+.nav-inner{
+  display:flex;gap:2px;
+  overflow-x:auto;scrollbar-width:none;
+  max-width:880px;margin:0 auto;
+}
+.nav-inner::-webkit-scrollbar{display:none;}
+.nav-btn{
+  flex-shrink:0;
+  padding:12px 16px;
+  font-family:'Sarabun',sans-serif;
+  font-size:13px;font-weight:500;
+  color:var(--tx3);
+  background:none;border:none;
+  border-bottom:2.5px solid transparent;
+  cursor:pointer;white-space:nowrap;
+  transition:color var(--t),border-color var(--t);
+}
+.nav-btn:hover{color:var(--tx2);}
+.nav-btn.active{color:var(--sakura-dk);border-bottom-color:var(--sakura-dk);}
+
+/* ═══ HERO ═══ */
+.hero{padding:36px 0 24px;text-align:center;}
+.hero-tag{
+  display:inline-block;
+  font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--sakura-dk);
+  background:var(--sakura-pale);
+  border:1px solid rgba(242,167,195,.4);
+  border-radius:var(--r-pill);
+  padding:4px 14px;margin-bottom:12px;
+}
+.hero h1{
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:clamp(26px,5vw,42px);
+  font-weight:300;
+  color:var(--tx1);
+  letter-spacing:-.01em;
+  line-height:1.2;
+  margin-bottom:6px;
+}
+.hero h1 span{color:var(--sakura-dk);font-weight:500;}
+.hero-sub{font-size:13px;color:var(--tx3);letter-spacing:.04em;}
+.hero-divider{
+  width:56px;height:2px;
+  background:linear-gradient(90deg,transparent,var(--sakura),var(--mustard),transparent);
+  margin:16px auto;
+  border-radius:2px;
+}
+
+/* ═══ PAGE ═══ */
+.page{display:none;}
+.page.active{display:block;animation:fadeUp .32s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+/* ═══ CARD ═══ */
+.card{
+  background:var(--card);
+  border:1.5px solid var(--border);
+  border-radius:var(--r-lg);
+  box-shadow:var(--shadow);
+  transition:all var(--t);
+  animation:fadeUp .3s ease both;
+}
+.card:hover{border-color:var(--border-hov);box-shadow:var(--shadow-hov);}
+
+/* ═══ BOOKING STRIP ═══ */
+.bk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:16px;}
+.bk{padding:16px 18px;position:relative;overflow:hidden;}
+.bk::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sakura),var(--mustard));}
+.bk-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--sakura-dk);margin-bottom:7px;}
+.bk-main{font-size:14px;font-weight:600;line-height:1.4;margin-bottom:3px;}
+.bk-sub{font-size:12px;color:var(--tx2);line-height:1.5;}
+.bk-price{font-size:15px;font-weight:700;color:var(--mustard-dk);margin-top:7px;}
+.bk-conf{font-size:10px;color:var(--tx3);font-family:'DM Mono',monospace;margin-top:3px;}
+
+/* ═══ DAY CARDS ═══ */
+.day-card{margin-bottom:12px;border-radius:var(--r-lg);overflow:hidden;}
+.day-hd{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 16px;cursor:pointer;user-select:none;
+  transition:background var(--t);
+  border-bottom:1px solid transparent;
+}
+.day-hd:hover{background:rgba(242,167,195,.05);}
+.day-num{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;
+  flex-shrink:0;
+  font-family:'DM Mono',monospace;
+  border:2px solid var(--sakura);
+  color:var(--sakura-dk);
+  background:var(--sakura-pale);
+}
+.day-info{flex:1;min-width:0;}
+.day-title{font-size:13px;font-weight:600;line-height:1.35;color:var(--tx1);}
+.day-sub{font-size:11px;color:var(--tx3);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.day-badge{
+  font-size:11px;font-weight:600;font-family:'DM Mono',monospace;
+  color:var(--mustard-dk);
+  background:var(--mustard-pale);
+  border:1px solid rgba(232,184,75,.35);
+  border-radius:var(--r-pill);
+  padding:3px 10px;flex-shrink:0;
+}
+.day-chevron{color:var(--tx3);font-size:12px;transition:transform var(--t);flex-shrink:0;}
+.day-chevron.open{transform:rotate(180deg);}
+.day-body{display:none;}
+.day-body.open{display:block;}
+
+/* ═══ EVENT ROW ═══ */
+.ev{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:8px 16px;
+  border-bottom:1px solid rgba(242,167,195,.1);
+  transition:background var(--t);
+}
+.ev:hover{background:rgba(255,244,248,.6);}
+.ev:last-child{border-bottom:none;}
+.ev-time{
+  font-family:'DM Mono',monospace;
+  font-size:10.5px;color:var(--tx3);
+  min-width:46px;padding-top:3px;flex-shrink:0;
+}
+.ev-badge-wrap{flex-shrink:0;padding-top:2px;}
+.ev-body{flex:1;min-width:0;}
+.ev-name{font-size:13px;font-weight:600;color:var(--tx1);line-height:1.4;}
+.ev-note{font-size:11.5px;color:var(--tx2);margin-top:2px;line-height:1.55;}
+.ev-route{
+  background:rgba(232,184,75,.08);
+  border-left:2.5px solid rgba(232,184,75,.5);
+  border-radius:0 7px 7px 0;
+  padding:5px 10px;margin-top:5px;
+  font-size:11px;font-family:'DM Mono',monospace;
+  color:var(--tx2);line-height:1.7;
+}
+.ev-route .xfer{color:var(--sakura-dk);font-weight:700;}
+.price-tag{
+  display:inline-block;font-size:10px;font-weight:600;
+  font-family:'DM Mono',monospace;
+  background:rgba(232,184,75,.15);color:var(--mustard-dk);
+  border:1px solid rgba(232,184,75,.3);
+  border-radius:var(--r-pill);padding:1px 7px;margin-left:6px;vertical-align:middle;
+}
+.ev-edit{background:none;border:none;color:var(--tx3);cursor:pointer;font-size:13px;padding:2px 5px;border-radius:6px;transition:color var(--t);flex-shrink:0;}
+.ev-edit:hover{color:var(--sakura-dk);}
+
+/* ═══ BADGES ═══ */
+.badge{font-size:10.5px;font-weight:600;padding:2px 9px;border-radius:var(--r-pill);white-space:nowrap;}
+.b-flight{background:rgba(196,153,235,.2);color:#8844BB;border:1px solid rgba(196,153,235,.35);}
+.b-transit{background:rgba(138,184,122,.18);color:#4A8A3A;border:1px solid rgba(138,184,122,.35);}
+.b-run{background:rgba(138,184,122,.2);color:#3A7A2A;border:1px solid rgba(138,184,122,.35);}
+.b-bath{background:rgba(100,160,220,.18);color:#2A6AAA;border:1px solid rgba(100,160,220,.3);}
+.b-cafe{background:rgba(210,140,80,.18);color:#A05A20;border:1px solid rgba(210,140,80,.3);}
+.b-food{background:rgba(242,167,195,.25);color:var(--sakura-dk);border:1px solid rgba(242,167,195,.4);}
+.b-shop{background:rgba(196,180,228,.25);color:#6644AA;border:1px solid rgba(196,180,228,.4);}
+.b-museum{background:rgba(100,160,220,.2);color:#1A5A9A;border:1px solid rgba(100,160,220,.3);}
+.b-art{background:rgba(232,184,75,.2);color:var(--mustard-dk);border:1px solid rgba(232,184,75,.35);}
+.b-concert{background:rgba(242,167,195,.3);color:#BB3366;border:1px solid rgba(242,167,195,.5);}
+.b-hotel{background:rgba(138,184,122,.2);color:#2A6A3A;border:1px solid rgba(138,184,122,.35);}
+
+/* ═══ RESTAURANT LIST ═══ */
+.restaurant-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;}
+.rest-card{padding:16px 18px;border-radius:var(--r-md);cursor:default;position:relative;overflow:hidden;}
+.rest-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:linear-gradient(90deg,var(--sakura),var(--mustard));}
+.rest-type{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mustard-dk);margin-bottom:5px;}
+.rest-name{font-size:13.5px;font-weight:600;margin-bottom:4px;color:var(--tx1);}
+.rest-area{font-size:11.5px;color:var(--tx2);margin-bottom:4px;}
+.rest-hrs{font-size:11px;font-family:'DM Mono',monospace;color:var(--tx3);}
+.rest-note{font-size:11px;color:var(--sakura-dk);margin-top:4px;font-style:italic;}
+
+/* ═══ TRANSPORT TABLE ═══ */
+.transport-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:20px;}
+.transport-table th{
+  background:var(--sakura-pale);
+  color:var(--sakura-dk);
+  font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:8px 12px;text-align:left;
+  border-bottom:1.5px solid var(--sakura);
+}
+.transport-table td{
+  padding:9px 12px;
+  border-bottom:1px solid rgba(242,167,195,.15);
+  vertical-align:top;
+  line-height:1.55;
+}
+.transport-table tr:hover td{background:rgba(255,244,248,.5);}
+.td-origin{font-family:'DM Mono',monospace;font-size:11px;color:var(--sage);font-weight:500;}
+.td-line{font-size:11.5px;color:var(--tx2);}
+.td-transfer{font-size:11px;color:var(--mustard-dk);font-weight:600;}
+.td-dest{font-family:'DM Mono',monospace;font-size:11px;color:var(--sakura-dk);font-weight:600;}
+.td-note{font-size:11px;color:var(--tx3);}
+.no-transit{color:var(--tx3);font-style:italic;font-size:11px;}
+
+/* ═══ FORM INPUTS ═══ */
+.gl-input{
+  width:100%;
+  background:rgba(255,255,255,.9);
+  border:1.5px solid var(--border);
+  border-radius:var(--r-sm);
+  padding:9px 13px;
+  color:var(--tx1);
+  font-family:'Sarabun',sans-serif;
+  font-size:13px;
+  transition:all var(--t);outline:none;
+}
+.gl-input:focus{border-color:rgba(242,167,195,.6);box-shadow:0 0 0 3px rgba(242,167,195,.12);}
+.gl-input::placeholder{color:var(--tx3);}
+textarea.gl-input{resize:vertical;min-height:72px;}
+select.gl-input option{background:#fff;color:var(--tx1);}
+
+.section-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sakura-dk);margin-bottom:10px;}
+.input-group{margin-bottom:11px;}
+.input-group label{display:block;font-size:11px;color:var(--tx2);margin-bottom:4px;font-weight:500;}
+
+/* ═══ BUTTONS ═══ */
+.btn{
+  font-family:'Sarabun',sans-serif;
+  font-size:13px;font-weight:600;
+  border-radius:var(--r-pill);
+  padding:9px 22px;border:none;cursor:pointer;
+  transition:all var(--t);
+}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:linear-gradient(135deg,var(--sakura-dk),var(--sakura));color:#fff;box-shadow:0 4px 14px rgba(212,112,138,.3);}
+.btn-primary:hover{box-shadow:0 6px 20px rgba(212,112,138,.4);transform:translateY(-1px);}
+.btn-mustard{background:linear-gradient(135deg,var(--mustard-dk),var(--mustard));color:#fff;box-shadow:0 4px 14px rgba(196,154,42,.3);}
+.btn-mustard:hover{box-shadow:0 6px 20px rgba(196,154,42,.4);transform:translateY(-1px);}
+.btn-ghost{background:var(--cream);color:var(--tx2);border:1.5px solid var(--border);}
+.btn-ghost:hover{background:var(--sakura-pale);color:var(--sakura-dk);}
+.btn-danger{background:rgba(220,80,80,.12);color:#CC4444;border:1.5px solid rgba(220,80,80,.25);font-size:11px;padding:6px 14px;}
+.btn-danger:hover{background:rgba(220,80,80,.22);}
+
+/* ═══ DIARY ═══ */
+.note-card{padding:16px 18px;margin-bottom:10px;position:relative;}
+.note-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--sakura),var(--mustard));border-radius:3px 0 0 3px;}
+.note-date{font-size:10px;color:var(--tx3);font-family:'DM Mono',monospace;margin-bottom:5px;}
+.note-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;gap:8px;}
+.note-title{font-size:13px;font-weight:600;color:var(--tx1);}
+.note-body{font-size:12.5px;color:var(--tx2);line-height:1.7;white-space:pre-wrap;}
+.nt-tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:var(--r-pill);margin-top:6px;}
+.nt-tag.general{background:var(--sakura-pale);color:var(--sakura-dk);border:1px solid rgba(242,167,195,.4);}
+.nt-tag.food{background:var(--mustard-pale);color:var(--mustard-dk);border:1px solid rgba(232,184,75,.4);}
+.nt-tag.shopping{background:rgba(196,180,228,.2);color:#6644AA;border:1px solid rgba(196,180,228,.4);}
+.nt-tag.concert{background:rgba(242,167,195,.25);color:#BB3366;border:1px solid rgba(242,167,195,.45);}
+.nt-tag.travel{background:rgba(138,184,122,.2);color:#3A7A2A;border:1px solid rgba(138,184,122,.35);}
+.no-notes{text-align:center;padding:40px 20px;color:var(--tx3);}
+
+/* ═══ QR GRID ═══ */
+.qr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px;margin-bottom:14px;}
+.qr-slot{padding:14px 12px;text-align:center;border-radius:var(--r-md);cursor:pointer;transition:all var(--t);}
+.qr-slot:hover{background:var(--sakura-pale);}
+.qr-preview{width:90px;height:90px;margin:0 auto 8px;background:var(--sakura-pale);border:1.5px dashed rgba(242,167,195,.5);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:22px;overflow:hidden;transition:all var(--t);}
+.qr-slot:hover .qr-preview{border-color:var(--sakura);}
+.qr-preview img{width:100%;height:100%;object-fit:cover;border-radius:8px;}
+.qr-lbl{font-size:11px;font-weight:600;color:var(--tx2);margin-bottom:2px;line-height:1.3;}
+.qr-hint{font-size:10px;color:var(--tx3);}
+input[type=file]{display:none;}
+
+/* ═══ MODAL ═══ */
+.overlay{display:none;position:fixed;inset:0;z-index:300;background:rgba(58,40,48,.5);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px;}
+.overlay.open{display:flex;}
+.modal{
+  background:var(--warm-white);
+  border:1.5px solid var(--border);
+  border-radius:var(--r-xl);
+  padding:26px;width:100%;max-width:480px;
+  box-shadow:0 20px 60px rgba(210,120,150,.2);
+  animation:modalIn .28s cubic-bezier(.34,1.4,.64,1) both;
+}
+@keyframes modalIn{from{opacity:0;transform:scale(.92) translateY(16px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.modal-title{font-size:16px;font-weight:700;color:var(--tx1);margin-bottom:16px;}
+.modal-footer{display:flex;gap:8px;justify-content:flex-end;margin-top:18px;}
+
+.tag-sel{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px;}
+.tag-btn{font-size:11px;font-weight:600;padding:5px 12px;border-radius:var(--r-pill);border:1.5px solid var(--border);background:var(--cream);color:var(--tx3);cursor:pointer;transition:all var(--t);font-family:'Sarabun',sans-serif;}
+.tag-btn.sel{background:var(--sakura-pale);border-color:var(--sakura);color:var(--sakura-dk);}
+
+/* ═══ LEGEND STRIP ═══ */
+.legend{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;}
+
+/* ═══ COFFEE SUMMARY ═══ */
+.coffee-card{
+  background:linear-gradient(135deg,var(--sakura-pale),var(--mustard-pale));
+  border:1.5px solid rgba(242,167,195,.35);
+  border-radius:var(--r-lg);
+  padding:16px 18px;margin-top:20px;
+}
+.coffee-card h3{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--sakura-dk);margin-bottom:10px;}
+.cr{display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid rgba(242,167,195,.15);}
+.cr:last-child{border-bottom:none;}
+.cr-dot{width:6px;height:6px;border-radius:50%;background:var(--sakura);flex-shrink:0;}
+.cr-day{font-size:11px;color:var(--tx3);min-width:90px;font-family:'DM Mono',monospace;}
+.cr-name{font-size:12px;font-weight:600;color:var(--tx1);flex:1;}
+
+/* ═══ FILTER BUTTONS ═══ */
+.filter-btn{font-size:12px;font-weight:500;padding:6px 14px;border-radius:var(--r-pill);background:var(--card);border:1.5px solid var(--border);color:var(--tx2);cursor:pointer;transition:all var(--t);font-family:'Sarabun',sans-serif;}
+.filter-btn:hover{border-color:rgba(242,167,195,.5);color:var(--sakura-dk);}
+.filter-btn.active{background:var(--sakura-pale);border-color:var(--sakura);color:var(--sakura-dk);}
+
+/* ═══ EXPENSE ═══ */
+.exp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:16px;}
+.exp-card{padding:13px 14px;border-radius:var(--r-md);text-align:center;}
+.exp-label{font-size:10px;color:var(--tx3);margin-bottom:3px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;}
+.exp-val{font-size:17px;font-weight:700;color:var(--mustard-dk);}
+.exp-sub{font-size:10px;color:var(--tx3);margin-top:1px;}
+.exp-table-wrap{border-radius:var(--r-lg);overflow:hidden;}
+.exp-table{width:100%;border-collapse:collapse;}
+.exp-table th{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--tx2);padding:8px 12px;text-align:left;background:var(--sakura-pale);border-bottom:1.5px solid var(--sakura);}
+.exp-table td{font-size:12px;padding:9px 12px;border-bottom:1px solid rgba(242,167,195,.12);vertical-align:middle;}
+.exp-table tr:hover td{background:rgba(255,244,248,.4);}
+.cat-pill{font-size:10px;font-weight:600;padding:2px 8px;border-radius:var(--r-pill);}
+.c-flight{background:rgba(196,153,235,.18);color:#8844BB;border:1px solid rgba(196,153,235,.3);}
+.c-hotel{background:rgba(138,184,122,.18);color:#3A7A2A;border:1px solid rgba(138,184,122,.3);}
+.c-food{background:rgba(242,167,195,.22);color:var(--sakura-dk);border:1px solid rgba(242,167,195,.4);}
+.c-transit{background:rgba(100,160,100,.15);color:#3A7A3A;border:1px solid rgba(100,160,100,.25);}
+.c-entry{background:rgba(100,160,220,.18);color:#1A5AAA;border:1px solid rgba(100,160,220,.3);}
+.c-concert{background:rgba(242,167,195,.3);color:#BB2255;border:1px solid rgba(242,167,195,.5);}
+.c-other{background:rgba(196,180,228,.2);color:#6644AA;border:1px solid rgba(196,180,228,.35);}
+.bar-wrap{margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.bar-label{font-size:11px;color:var(--tx2);min-width:80px;}
+.bar-track{flex:1;height:7px;background:rgba(242,167,195,.15);border-radius:4px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:4px;transition:width .5s ease;}
+.bar-val{font-size:11px;font-family:'DM Mono',monospace;color:var(--mustard-dk);min-width:80px;text-align:right;}
+
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:rgba(242,167,195,.4);border-radius:3px;}
+
+@media(max-width:600px){
+  .bk-grid{grid-template-columns:1fr;}
+  .day-badge{display:none;}
+}
+
+/* ═══ SHOPPING LIST ═══ */
+.shop-group{margin-bottom:24px;}
+.shop-group-title{
+  display:flex;align-items:center;gap:10px;
+  font-size:13px;font-weight:700;
+  color:var(--sakura-dk);
+  background:linear-gradient(135deg,var(--sakura-pale),var(--mustard-pale));
+  border:1.5px solid rgba(242,167,195,.35);
+  border-radius:var(--r-md);
+  padding:10px 16px;margin-bottom:10px;
+}
+.shop-group-title .area-tag{
+  font-size:10px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;
+  background:var(--sakura-dk);color:#fff;
+  border-radius:var(--r-pill);padding:2px 9px;
+}
+.shop-group-title .transit-mini{
+  font-size:10.5px;font-weight:400;color:var(--tx2);
+  font-family:'DM Mono',monospace;margin-left:auto;
+}
+.shop-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+.shop-table th{
+  font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--tx2);padding:7px 12px;text-align:left;
+  background:rgba(242,167,195,.1);
+  border-bottom:1.5px solid rgba(242,167,195,.3);
+}
+.shop-table td{padding:9px 12px;border-bottom:1px solid rgba(242,167,195,.1);vertical-align:middle;}
+.shop-table tr:hover td{background:rgba(255,244,248,.5);}
+.shop-table tr.checked td{opacity:.45;text-decoration:line-through;}
+.shop-num{font-size:11px;font-family:'DM Mono',monospace;color:var(--tx3);width:28px;}
+.shop-name{font-weight:600;color:var(--tx1);}
+.shop-hrs{font-family:'DM Mono',monospace;font-size:11px;color:var(--tx2);white-space:nowrap;}
+.shop-note{font-size:11px;color:var(--tx3);font-style:italic;}
+.shop-warn{color:var(--mustard-dk);font-style:normal;font-weight:600;}
+.shop-check{width:28px;text-align:center;}
+.shop-check input[type=checkbox]{
+  width:15px;height:15px;cursor:pointer;
+  accent-color:var(--sakura-dk);
+}
+.close-early{background:rgba(232,184,75,.12);}
+.close-late{background:rgba(138,184,122,.08);}
+.shop-tip-box{
+  background:linear-gradient(135deg,var(--mustard-pale),var(--sakura-pale));
+  border:1.5px solid rgba(232,184,75,.35);
+  border-radius:var(--r-lg);padding:16px 18px;margin-bottom:16px;
+}
+.shop-tip-title{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mustard-dk);margin-bottom:8px;}
+.shop-tip-item{font-size:12.5px;color:var(--tx1);padding:4px 0;line-height:1.6;}
+.shop-tip-item::before{content:'💡 ';font-size:12px;}
+.shop-progress{
+  display:flex;align-items:center;gap:10px;
+  background:var(--card);border:1.5px solid var(--border);
+  border-radius:var(--r-md);padding:12px 16px;margin-bottom:14px;
+}
+.shop-prog-bar{flex:1;height:8px;background:rgba(242,167,195,.2);border-radius:4px;overflow:hidden;}
+.shop-prog-fill{height:100%;background:linear-gradient(90deg,var(--sakura),var(--mustard));border-radius:4px;transition:width .4s ease;}
+.shop-prog-text{font-size:12px;font-weight:600;color:var(--sakura-dk);white-space:nowrap;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="showPage('itinerary',this)">🌸 Itinerary</button>
+    <button class="nav-btn" onclick="showPage('transport',this)">🚆 Transport</button>
+    <button class="nav-btn" onclick="showPage('restaurants',this)">🍽 Restaurants</button>
+    <button class="nav-btn" onclick="showPage('expense',this)">💴 Expense</button>
+    <button class="nav-btn" onclick="showPage('traveler',this)">🪪 Traveler</button>
+    <button class="nav-btn" onclick="showPage('documents',this)">📋 Documents</button>
+    <button class="nav-btn" onclick="showPage('shopping',this)">🛍 Shopping</button>
+    <button class="nav-btn" onclick="showPage('diary',this)">📔 Diary</button>
+  </div>
+</nav>
+
+<div class="app">
+
+<div class="hero">
+  <div class="hero-tag">🌸 Tokyo · 東京 · April 2026</div>
+  <h1>Trip <span>Planner</span></h1>
+  <div class="hero-sub">22–28 เมษายน 2026 · Remm Roppongi · 2 คน</div>
+  <div class="hero-divider"></div>
+</div>
+
+<!-- ════ ITINERARY ════ -->
+<div id="page-itinerary" class="page active">
+  <div class="bk-grid">
+    <div class="card bk" style="animation-delay:.04s">
+      <div class="bk-label">✈ Japan Airlines</div>
+      <div class="bk-main">JL708 · BKK → TYO</div>
+      <div class="bk-sub">22 เม.ย. · 07:55 → 16:05 · Narita T2 · Boeing 787 · 6h10m</div>
+      <div class="bk-main" style="margin-top:8px;">JL707 · TYO → BKK</div>
+      <div class="bk-sub">28 เม.ย. · 18:25 → 23:00 · 6h35m</div>
+      <div class="bk-price">฿39,190 · ¥198,669 (2 คน)</div>
+    </div>
+    <div class="card bk" style="animation-delay:.08s">
+      <div class="bk-label">🏨 Remm Roppongi</div>
+      <div class="bk-main">22–25 เมษายน · 3 คืน</div>
+      <div class="bk-sub">Booking <span style="font-family:'DM Mono',monospace;color:var(--sakura-dk);">6479118381</span></div>
+      <div class="bk-price">¥83,030</div>
+      <div class="bk-main" style="margin-top:8px;">25–28 เมษายน · 3 คืน</div>
+      <div class="bk-sub">Booking <span style="font-family:'DM Mono',monospace;color:var(--sakura-dk);">5049632821</span></div>
+      <div class="bk-price">¥57,684</div>
+    </div>
+    <div class="card bk" style="animation-delay:.12s">
+      <div class="bk-label">💴 ค่าใช้จ่ายรวม (2 คน)</div>
+      <div style="display:grid;gap:6px;margin-top:4px;">
+        <div><div class="bk-conf">ตั๋วเครื่องบิน</div><div class="bk-price" style="font-size:13px;margin:0;">¥198,669</div></div>
+        <div><div class="bk-conf">โรงแรม 6 คืน</div><div class="bk-price" style="font-size:13px;margin:0;">¥140,714</div></div>
+        <div><div class="bk-conf">รถไฟ + อาหาร + ค่าเข้า</div><div class="bk-price" style="font-size:13px;margin:0;">~¥110,000</div></div>
+        <div style="border-top:1px solid var(--border);padding-top:6px;">
+          <div class="bk-conf">รวมประมาณ</div>
+          <div class="bk-price">~¥449,000+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span class="badge b-flight">เที่ยวบิน</span>
+    <span class="badge b-transit">เดินทาง</span>
+    <span class="badge b-run">วิ่ง</span>
+    <span class="badge b-cafe">คาเฟ่</span>
+    <span class="badge b-food">อาหาร</span>
+    <span class="badge b-shop">ชอปปิ้ง</span>
+    <span class="badge b-museum">พิพิธภัณฑ์</span>
+    <span class="badge b-art">ศิลปะ</span>
+    <span class="badge b-concert">คอนเสิร์ต</span>
+    <span class="badge b-hotel">โรงแรม</span>
+  </div>
+
+  <div id="days-container"></div>
+
+  <div class="coffee-card" style="animation-delay:.2s;">
+    <h3>☕ ร้านกาแฟหลังวิ่ง — ไม่ซ้ำวัน</h3>
+    <div class="cr"><div class="cr-dot"></div><div class="cr-day">พฤ 23 เม.ย.</div><div class="cr-name">Common Cafe <span style="color:var(--tx3);font-weight:400;">Nishi-Azabu</span></div></div>
+    <div class="cr"><div class="cr-dot"></div><div class="cr-day">ศ 24 เม.ย.</div><div class="cr-name">Glitch Coffee & Roasters <span style="color:var(--tx3);font-weight:400;">Kanda / Jinbocho</span></div></div>
+    <div class="cr"><div class="cr-dot"></div><div class="cr-day">ส 25 เม.ย.</div><div class="cr-name">Verve Coffee Roasters <span style="color:var(--tx3);font-weight:400;">Roppongi</span></div></div>
+    <div class="cr"><div class="cr-dot"></div><div class="cr-day">อา 26 เม.ย.</div><div class="cr-name">Blue Bottle Coffee <span style="color:var(--tx3);font-weight:400;">Roppongi Hills</span></div></div>
+    <div class="cr"><div class="cr-dot"></div><div class="cr-day">จ 27 เม.ย.</div><div class="cr-name">Verve Coffee Roasters <span style="color:var(--tx3);font-weight:400;">Ebisu Garden Place</span></div></div>
+  </div>
+</div>
+
+<!-- ════ TRANSPORT ════ -->
+<div id="page-transport" class="page">
+  <div style="margin-bottom:14px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:3px;">ตารางการเดินทาง</div>
+    <div style="font-size:12px;color:var(--tx3);">เส้นทางแต่ละวัน · ต้นทาง → สาย → จุดเปลี่ยน → ปลายทาง</div>
+  </div>
+  <div id="transport-day-filter" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;"></div>
+  <div class="card exp-table-wrap">
+    <table class="transport-table" id="transport-table">
+      <thead>
+        <tr>
+          <th>วัน/เวลา</th>
+          <th>กิจกรรม</th>
+          <th>ต้นทาง</th>
+          <th>สาย (Line)</th>
+          <th>จุดเปลี่ยน (Transfer)</th>
+          <th>ปลายทาง</th>
+          <th>หมายเหตุ</th>
+        </tr>
+      </thead>
+      <tbody id="transport-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ════ RESTAURANTS ════ -->
+<div id="page-restaurants" class="page">
+  <div style="margin-bottom:14px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:3px;">ร้านอาหารในทริป</div>
+    <div style="font-size:12px;color:var(--tx3);">รายชื่อร้านทั้งหมดที่อยู่ใน plan</div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;" id="rest-filter-wrap"></div>
+  <div class="restaurant-grid" id="rest-grid"></div>
+</div>
+
+<!-- ════ EXPENSE ════ -->
+<div id="page-expense" class="page">
+  <div class="exp-grid" id="exp-summary"></div>
+  <div class="card" style="padding:16px 18px;margin-bottom:14px;">
+    <div class="section-label" style="margin-bottom:12px;">สัดส่วนค่าใช้จ่าย</div>
+    <div id="exp-bars"></div>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+    <div style="font-size:14px;font-weight:700;">รายการทั้งหมด</div>
+    <button class="btn btn-mustard" style="font-size:12px;padding:7px 16px;" onclick="openAddExp()">+ เพิ่มรายการ</button>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;" id="exp-filter-wrap"></div>
+  <div class="card exp-table-wrap">
+    <table class="exp-table">
+      <thead><tr><th>วัน</th><th>รายการ</th><th>หมวด</th><th style="text-align:right;">¥/คน</th><th></th></tr></thead>
+      <tbody id="exp-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ════ TRAVELER ════ -->
+<div id="page-traveler" class="page">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+    <div class="card" style="padding:18px;">
+      <div class="section-label">ผู้เดินทาง คนที่ 1</div>
+      <div class="input-group"><label>ชื่อ (ตามพาสปอร์ต)</label><input class="gl-input" id="t1-name" oninput="saveProfile()"></div>
+      <div class="input-group"><label>หมายเลขพาสปอร์ต</label><input class="gl-input" id="t1-passport" oninput="saveProfile()"></div>
+      <div class="input-group"><label>วันหมดอายุ</label><input class="gl-input" type="date" id="t1-expiry" oninput="saveProfile()"></div>
+      <div class="input-group"><label>เบอร์โทร</label><input class="gl-input" id="t1-phone" oninput="saveProfile()"></div>
+    </div>
+    <div class="card" style="padding:18px;">
+      <div class="section-label">ผู้เดินทาง คนที่ 2</div>
+      <div class="input-group"><label>ชื่อ (ตามพาสปอร์ต)</label><input class="gl-input" id="t2-name" oninput="saveProfile()"></div>
+      <div class="input-group"><label>หมายเลขพาสปอร์ต</label><input class="gl-input" id="t2-passport" oninput="saveProfile()"></div>
+      <div class="input-group"><label>วันหมดอายุ</label><input class="gl-input" type="date" id="t2-expiry" oninput="saveProfile()"></div>
+      <div class="input-group"><label>เบอร์โทร</label><input class="gl-input" id="t2-phone" oninput="saveProfile()"></div>
+    </div>
+  </div>
+  <div class="card" style="padding:18px;margin-bottom:12px;">
+    <div class="section-label">Visit Japan Web</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div><label style="font-size:11px;color:var(--tx2);display:block;margin-bottom:4px;">รหัส คนที่ 1</label><input class="gl-input" id="vjw1" placeholder="VJW-XXXXXXXX" oninput="saveProfile();updateVJW()"></div>
+      <div><label style="font-size:11px;color:var(--tx2);display:block;margin-bottom:4px;">รหัส คนที่ 2</label><input class="gl-input" id="vjw2" placeholder="VJW-XXXXXXXX" oninput="saveProfile();updateVJW()"></div>
+    </div>
+  </div>
+  <div class="card" style="padding:18px;">
+    <div class="section-label">ติดต่อฉุกเฉิน</div>
+    <div class="input-group"><label>ที่อยู่ รร.</label><input class="gl-input" id="hotel-addr" value="3-9-9 Roppongi, Minato, Tokyo 106-0032" oninput="saveProfile()"></div>
+    <div class="input-group"><label>เบอร์โรงแรม</label><input class="gl-input" id="hotel-tel" value="+81 3-5413-8811" oninput="saveProfile()"></div>
+    <div class="input-group"><label>สถานทูตไทย Tokyo</label><input class="gl-input" id="embassy" value="+81 3-3222-4101" oninput="saveProfile()"></div>
+    <div class="input-group"><label>ฉุกเฉิน Japan</label><input class="gl-input" id="emergency" value="110 ตำรวจ · 119 พยาบาล/ดับเพลิง" oninput="saveProfile()"></div>
+  </div>
+</div>
+
+<!-- ════ DOCUMENTS ════ -->
+<div id="page-documents" class="page">
+  <div class="card" style="padding:18px;margin-bottom:12px;">
+    <div class="section-label">Visit Japan Web · รหัส</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px;">
+      <div><div style="font-size:10px;color:var(--tx3);margin-bottom:5px;">คนที่ 1</div>
+        <div id="vjw-d1" style="background:var(--sakura-pale);border:1px solid rgba(242,167,195,.4);border-radius:10px;padding:12px;font-family:'DM Mono',monospace;font-size:15px;color:var(--sakura-dk);text-align:center;">—</div>
+      </div>
+      <div><div style="font-size:10px;color:var(--tx3);margin-bottom:5px;">คนที่ 2</div>
+        <div id="vjw-d2" style="background:var(--sakura-pale);border:1px solid rgba(242,167,195,.4);border-radius:10px;padding:12px;font-family:'DM Mono',monospace;font-size:15px;color:var(--sakura-dk);text-align:center;">—</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--tx3);">กรอกรหัสในหน้า Traveler เพื่อให้แสดงที่นี่</div>
+  </div>
+  <div class="section-label" style="padding:0 2px;">QR Codes & เอกสาร</div>
+  <div class="qr-grid" id="qr-grid" style="margin-top:8px;"></div>
+  <div style="text-align:center;margin-bottom:16px;"><button class="btn btn-ghost" onclick="addQR()">+ เพิ่ม QR Code</button></div>
+  <div class="card" style="padding:18px;">
+    <div class="section-label">เอกสารสำคัญ</div>
+    <div class="input-group"><label>Booking เครื่องบิน</label><input class="gl-input" id="doc-flight" value="JL708/JL707 · ฿39,190 · ¥198,669"></div>
+    <div class="input-group"><label>Booking รร. (22–25 เม.ย.)</label><input class="gl-input" id="doc-h1" value="6479118381 · ¥83,030"></div>
+    <div class="input-group"><label>Booking รร. (25–28 เม.ย.)</label><input class="gl-input" id="doc-h2" value="5049632821 · ¥57,684"></div>
+    <div class="input-group"><label>ประกันการเดินทาง</label><input class="gl-input" id="doc-ins" placeholder="Policy No."></div>
+    <div class="input-group"><label>หมายเหตุ</label><textarea class="gl-input" id="doc-note" placeholder="บันทึกข้อมูลสำคัญ..."></textarea></div>
+    <button class="btn btn-primary" onclick="saveDocs()">บันทึก</button>
+  </div>
+</div>
+
+<!-- ════ DIARY ════ -->
+<div id="page-diary" class="page">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+    <div><div style="font-size:15px;font-weight:700;">Travel Diary 📔</div><div style="font-size:11px;color:var(--tx3);">บันทึกความทรงจำและ Memo</div></div>
+    <button class="btn btn-primary" onclick="openNote()">+ บันทึกใหม่</button>
+  </div>
+  <div id="notes-wrap"></div>
+  <div id="no-notes" class="no-notes"><div style="font-size:36px;margin-bottom:10px;">🌸</div><div style="font-size:14px;">ยังไม่มีบันทึก</div><div style="font-size:12px;margin-top:4px;">กด + บันทึกใหม่ เพื่อเริ่มต้น</div></div>
+</div>
+
+
+<!-- ════ SHOPPING ════ -->
+<div id="page-shopping" class="page">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+    <div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:3px;">Shopping List 🛍</div>
+      <div style="font-size:12px;color:var(--tx3);">30 ร้าน · 4 ย่าน · กาเครื่องหมายเมื่อไปแล้ว</div>
+    </div>
+    <button class="btn btn-ghost" style="font-size:11px;padding:6px 12px;" onclick="resetShop()">Reset</button>
+  </div>
+
+  <div class="shop-progress">
+    <div style="font-size:12px;color:var(--tx2);">ไปแล้ว</div>
+    <div class="shop-prog-bar"><div class="shop-prog-fill" id="shop-prog-fill" style="width:0%;"></div></div>
+    <div class="shop-prog-text" id="shop-prog-text">0 / 30</div>
+  </div>
+
+  <div class="shop-tip-box">
+    <div class="shop-tip-title">💡 Tips การวางแผน</div>
+    <div class="shop-tip-item"><span style="color:var(--sakura-dk);font-weight:600;">ปิดเร็ว 19:00</span> — Stüssy, Monocle, A.P.C., Barbour, Coverchord · ไปช่วงบ่ายก่อนเลย</div>
+    <div class="shop-tip-item"><span style="color:var(--sage);font-weight:600;">เปิดดึก 22:00+</span> — Tower Records, Alpen Tokyo, Tsutaya Books · เก็บไว้ท้ายสุด</div>
+    <div class="shop-tip-item">Harajuku/Omotesando/Shibuya ใกล้กัน รวมเป็นวันเดียวได้ · Daikanyama แยกอีกวัน</div>
+    <div class="shop-tip-item"><span style="color:var(--mustard-dk);font-weight:600;">Alpen Shinjuku</span> — 10 ชั้น! ออก East Exit เดิน ~2 min · ชั้น 1 = Running & Basketball</div>
+    <div class="shop-tip-item"><span style="color:var(--mustard-dk);font-weight:600;">Norda</span> — ไม่มี flagship · หาได้ที่ downbeat RUNNING (Shinjuku) หรือ atmos Tokyo</div>
+  </div>
+
+  
+<div class="shop-group">
+  <div class="shop-group-title">
+    <span class="area-tag">กลุ่ม 1</span>
+    <span>📍 Harajuku & Omotesando</span>
+    <span class="transit-mini">E23 → E24 Aoyama-itchome ⇄ G04 → G02 Omotesando [Ginza]  ~10 min</span>
+  </div>
+  <div class="card" style="overflow:hidden;">
+    <table class="shop-table">
+      <thead><tr>
+        <th style="width:28px;"></th>
+        <th style="width:28px;">#</th>
+        <th>ร้าน</th>
+        <th style="width:100px;">เวลาเปิด</th>
+        <th>หมายเหตุ</th>
+      </tr></thead>
+      <tbody><tr class="close-early" id="shoprow-1">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('1',this)"></td>
+          <td class="shop-num">1</td>
+          <td class="shop-name">I'm donut? Harajuku</td>
+          <td class="shop-hrs">10:00–20:00</td>
+          <td class="shop-note">⚠ ไปก่อนเปิด คิวยาวมาก</td>
+        </tr><tr class="" id="shoprow-2">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('2',this)"></td>
+          <td class="shop-num">2</td>
+          <td class="shop-name">Kinetics Harajuku</td>
+          <td class="shop-hrs">11:00–20:00</td>
+          <td class="shop-note"></td>
+        </tr><tr class="" id="shoprow-3">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('3',this)"></td>
+          <td class="shop-num">3</td>
+          <td class="shop-name">Harry Potter Shop Harajuku</td>
+          <td class="shop-hrs">11:00–21:00</td>
+          <td class="shop-note"></td>
+        </tr><tr class="" id="shoprow-4">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('4',this)"></td>
+          <td class="shop-num">4</td>
+          <td class="shop-name">Vivienne Westwood Harajuku</td>
+          <td class="shop-hrs">11:00–20:00</td>
+          <td class="shop-note">สาขาใน Laforet Harajuku</td>
+        </tr><tr class="" id="shoprow-5">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('5',this)"></td>
+          <td class="shop-num">5</td>
+          <td class="shop-name">Human Made Harajuku</td>
+          <td class="shop-hrs">11:00–20:00</td>
+          <td class="shop-note">แบรนด์ NIGO · ใกล้ Cat Street</td>
+        </tr><tr class="" id="shoprow-6">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('6',this)"></td>
+          <td class="shop-num">6</td>
+          <td class="shop-name">3COINS Harajuku Main Store</td>
+          <td class="shop-hrs">11:00–20:00</td>
+          <td class="shop-note"></td>
+        </tr><tr class="close-late" id="shoprow-7">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('7',this)"></td>
+          <td class="shop-num">7</td>
+          <td class="shop-name">Harakado (ฮาราคาโดะ)</td>
+          <td class="shop-hrs">11:00–23:00</td>
+          <td class="shop-note">ร้านค้าปิด 21:00 · ร้านอาหารดึกกว่า</td>
+        </tr><tr class="" id="shoprow-8">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('8',this)"></td>
+          <td class="shop-num">8</td>
+          <td class="shop-name">Kiddy Land Omotesando</td>
+          <td class="shop-hrs">11:00–20:00</td>
+          <td class="shop-note">ของเล่น ของสะสม</td>
+        </tr><tr class="" id="shoprow-9">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('9',this)"></td>
+          <td class="shop-num">9</td>
+          <td class="shop-name">MoMA Design Store Omotesando</td>
+          <td class="shop-hrs">11:00–20:00</td>
+          <td class="shop-note">ของ design จาก MoMA NY</td>
+        </tr><tr class="" id="shoprow-10">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('10',this)"></td>
+          <td class="shop-num">10</td>
+          <td class="shop-name">Polo Ralph Lauren Omotesando</td>
+          <td class="shop-hrs">11:00–20:00</td>
+          <td class="shop-note"></td>
+        </tr><tr class="" id="shoprow-11">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('11',this)"></td>
+          <td class="shop-num">11</td>
+          <td class="shop-name">Longchamp Omotesando</td>
+          <td class="shop-hrs">11:00–20:00</td>
+          <td class="shop-note">กระเป๋า</td>
+        </tr><tr class="close-early" id="shoprow-12">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('12',this)"></td>
+          <td class="shop-num">12</td>
+          <td class="shop-name">Stüssy Harajuku Chapter</td>
+          <td class="shop-hrs">11:00–19:00</td>
+          <td class="shop-note">⚠ ปิดเร็ว 19:00</td>
+        </tr><tr class="" id="shoprow-13">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('13',this)"></td>
+          <td class="shop-num">13</td>
+          <td class="shop-name">BEAMS Harajuku</td>
+          <td class="shop-hrs">12:00–20:00</td>
+          <td class="shop-note">เปิดเที่ยง (ส-อา เปิด 11:00)</td>
+        </tr><tr class="" id="shoprow-14">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('14',this)"></td>
+          <td class="shop-num">14</td>
+          <td class="shop-name">ARC'TERYX Harajuku</td>
+          <td class="shop-hrs">11:00–20:00</td>
+          <td class="shop-note"></td>
+        </tr><tr class="" id="shoprow-15">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('15',this)"></td>
+          <td class="shop-num">15</td>
+          <td class="shop-name">THE NORTH FACE Sphere</td>
+          <td class="shop-hrs">11:00–21:00</td>
+          <td class="shop-note"></td>
+        </tr><tr class="" id="shoprow-16">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('16',this)"></td>
+          <td class="shop-num">16</td>
+          <td class="shop-name">Adidas Brand Center Harajuku</td>
+          <td class="shop-hrs">11:00–20:00</td>
+          <td class="shop-note">Cat Street</td>
+        </tr></tbody>
+    </table>
+  </div>
+</div>
+<div class="shop-group">
+  <div class="shop-group-title">
+    <span class="area-tag">กลุ่ม 2</span>
+    <span>📍 Shibuya</span>
+    <span class="transit-mini">E23 → E24 Aoyama-itchome ⇄ G04 → G01 Shibuya [Ginza]  ~10 min</span>
+  </div>
+  <div class="card" style="overflow:hidden;">
+    <table class="shop-table">
+      <thead><tr>
+        <th style="width:28px;"></th>
+        <th style="width:28px;">#</th>
+        <th>ร้าน</th>
+        <th style="width:100px;">เวลาเปิด</th>
+        <th>หมายเหตุ</th>
+      </tr></thead>
+      <tbody><tr class="" id="shoprow-17">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('17',this)"></td>
+          <td class="shop-num">17</td>
+          <td class="shop-name">Salomon Store Tokyo Shibuya</td>
+          <td class="shop-hrs">11:00–20:00</td>
+          <td class="shop-note">🆕 สาขาใหม่ 2 ชั้น หน้า Meiji Dori</td>
+        </tr><tr class="" id="shoprow-18">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('18',this)"></td>
+          <td class="shop-num">18</td>
+          <td class="shop-name">Carhartt WIP Store Shibuya</td>
+          <td class="shop-hrs">11:00–20:00</td>
+          <td class="shop-note"></td>
+        </tr><tr class="" id="shoprow-19">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('19',this)"></td>
+          <td class="shop-num">19</td>
+          <td class="shop-name">Acne Studios Shibuya Parco</td>
+          <td class="shop-hrs">11:00–21:00</td>
+          <td class="shop-note">อยู่ใน Parco Shibuya</td>
+        </tr><tr class="close-late" id="shoprow-20">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('20',this)"></td>
+          <td class="shop-num">20</td>
+          <td class="shop-name">Pokémon Center Shibuya</td>
+          <td class="shop-hrs">10:00–21:00</td>
+          <td class="shop-note">อยู่ใน Parco Shibuya (ชั้น 6)</td>
+        </tr><tr class="close-late" id="shoprow-21">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('21',this)"></td>
+          <td class="shop-num">21</td>
+          <td class="shop-name">Tower Records Shibuya</td>
+          <td class="shop-hrs">11:00–22:00</td>
+          <td class="shop-note">⭐ ปิดดึกสุด เก็บไว้จุดสุดท้าย</td>
+        </tr></tbody>
+    </table>
+  </div>
+</div>
+<div class="shop-group">
+  <div class="shop-group-title">
+    <span class="area-tag">กลุ่ม 3</span>
+    <span>📍 Shinjuku</span>
+    <span class="transit-mini">G01 Shibuya → [JR Yamanote ฝั่ง Shinjuku] → JR Shinjuku (East Exit)  ~7 min</span>
+  </div>
+  <div class="card" style="overflow:hidden;">
+    <table class="shop-table">
+      <thead><tr>
+        <th style="width:28px;"></th>
+        <th style="width:28px;">#</th>
+        <th>ร้าน</th>
+        <th style="width:100px;">เวลาเปิด</th>
+        <th>หมายเหตุ</th>
+      </tr></thead>
+      <tbody><tr class="" id="shoprow-22">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('22',this)"></td>
+          <td class="shop-num">22</td>
+          <td class="shop-name">On Store Tokyo / Cat Street</td>
+          <td class="shop-hrs">11:00–20:00</td>
+          <td class="shop-note">สาขา Shinjuku กำลังจะเปิด หรือแวะ Alpen แทนได้</td>
+        </tr><tr class="close-late" id="shoprow-23">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('23',this)"></td>
+          <td class="shop-num">23</td>
+          <td class="shop-name">Alpen TOKYO Shinjuku</td>
+          <td class="shop-hrs">11:00–22:00</td>
+          <td class="shop-note">⭐ 10 ชั้น! ส-อา เปิด 10:00 · ออก East Exit เดิน ~2 min</td>
+        </tr><tr class="" id="shoprow-24">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('24',this)"></td>
+          <td class="shop-num">24</td>
+          <td class="shop-name">downbeat RUNNING</td>
+          <td class="shop-hrs">12:00–21:00</td>
+          <td class="shop-note">เปิดเที่ยง · มี Norda, On, Salomon, HOKA</td>
+        </tr></tbody>
+    </table>
+  </div>
+</div>
+<div class="shop-group">
+  <div class="shop-group-title">
+    <span class="area-tag">กลุ่ม 4</span>
+    <span>📍 Daikanyama & Nakameguro</span>
+    <span class="transit-mini">H04 → H01 Nakameguro [Hibiya · 3 stops ~7 min] เดิน ~10 min → Daikanyama</span>
+  </div>
+  <div class="card" style="overflow:hidden;">
+    <table class="shop-table">
+      <thead><tr>
+        <th style="width:28px;"></th>
+        <th style="width:28px;">#</th>
+        <th>ร้าน</th>
+        <th style="width:100px;">เวลาเปิด</th>
+        <th>หมายเหตุ</th>
+      </tr></thead>
+      <tbody><tr class="close-early" id="shoprow-25">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('25',this)"></td>
+          <td class="shop-num">25</td>
+          <td class="shop-name">The Monocle Shop Tokyo</td>
+          <td class="shop-hrs">12:00–19:00</td>
+          <td class="shop-note">⚠ เปิดเที่ยง ปิด 19:00 ไปก่อน!</td>
+        </tr><tr class="" id="shoprow-26">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('26',this)"></td>
+          <td class="shop-num">26</td>
+          <td class="shop-name">Maison Kitsuné Daikanyama</td>
+          <td class="shop-hrs">11:00–20:00</td>
+          <td class="shop-note"></td>
+        </tr><tr class="close-late" id="shoprow-27">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('27',this)"></td>
+          <td class="shop-num">27</td>
+          <td class="shop-name">Tsutaya Books Daikanyama</td>
+          <td class="shop-hrs">09:00–22:00</td>
+          <td class="shop-note">⭐ เปิดเช้า-ดึก · ร้านหนังสือใหญ่</td>
+        </tr><tr class="close-early" id="shoprow-28">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('28',this)"></td>
+          <td class="shop-num">28</td>
+          <td class="shop-name">A.P.C. Daikanyama</td>
+          <td class="shop-hrs">11:00–19:00</td>
+          <td class="shop-note">⚠ ปิด 19:00</td>
+        </tr><tr class="close-early" id="shoprow-29">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('29',this)"></td>
+          <td class="shop-num">29</td>
+          <td class="shop-name">Barbour Daikanyama</td>
+          <td class="shop-hrs">11:00–19:30</td>
+          <td class="shop-note">⚠ ปิด 19:30</td>
+        </tr><tr class="close-early" id="shoprow-30">
+          <td class="shop-check"><input type="checkbox" onchange="toggleShop('30',this)"></td>
+          <td class="shop-num">30</td>
+          <td class="shop-name">Coverchord Nakameguro</td>
+          <td class="shop-hrs">11:00–19:00</td>
+          <td class="shop-note">⚠ ปิด 19:00</td>
+        </tr></tbody>
+    </table>
+  </div>
+</div>
+</div>
+</div><!-- /app -->
+
+<!-- MODAL: edit event -->
+<div class="overlay" id="m-event">
+  <div class="modal">
+    <div class="modal-title">✏️ แก้ไขรายการ</div>
+    <input type="hidden" id="e-di"><input type="hidden" id="e-ei">
+    <div class="input-group"><label>เวลา</label><input class="gl-input" id="e-time"></div>
+    <div class="input-group"><label>รายการ</label><input class="gl-input" id="e-name"></div>
+    <div class="input-group"><label>หมายเหตุ</label><textarea class="gl-input" id="e-note" rows="2"></textarea></div>
+    <div class="input-group"><label>ประเภท</label>
+      <select class="gl-input" id="e-type">
+        <option value="transit">เดินทาง</option><option value="flight">เที่ยวบิน</option><option value="run">วิ่ง</option><option value="bath">อาบน้ำ</option><option value="cafe">คาเฟ่</option><option value="food">อาหาร</option><option value="shop">ชอปปิ้ง</option><option value="museum">พิพิธภัณฑ์</option><option value="art">ศิลปะ</option><option value="concert">คอนเสิร์ต</option><option value="hotel">โรงแรม</option>
+      </select>
+    </div>
+    <div class="input-group"><label>ราคา ¥/คน</label><input class="gl-input" id="e-price" type="number" placeholder="0"></div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" onclick="delEvent()">ลบ</button>
+      <button class="btn btn-ghost" onclick="closeM('m-event')">ยกเลิก</button>
+      <button class="btn btn-primary" onclick="saveEvent()">บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: add event -->
+<div class="overlay" id="m-add">
+  <div class="modal">
+    <div class="modal-title">➕ เพิ่มรายการ</div>
+    <input type="hidden" id="a-di">
+    <div class="input-group"><label>เวลา</label><input class="gl-input" id="a-time" placeholder="09:00"></div>
+    <div class="input-group"><label>รายการ</label><input class="gl-input" id="a-name" placeholder="ชื่อกิจกรรม..."></div>
+    <div class="input-group"><label>หมายเหตุ</label><textarea class="gl-input" id="a-note" rows="2"></textarea></div>
+    <div class="input-group"><label>ประเภท</label>
+      <select class="gl-input" id="a-type">
+        <option value="food">อาหาร</option><option value="transit">เดินทาง</option><option value="cafe">คาเฟ่</option><option value="shop">ชอปปิ้ง</option><option value="museum">พิพิธภัณฑ์</option><option value="art">ศิลปะ</option><option value="concert">คอนเสิร์ต</option><option value="hotel">โรงแรม</option><option value="flight">เที่ยวบิน</option><option value="run">วิ่ง</option>
+      </select>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeM('m-add')">ยกเลิก</button>
+      <button class="btn btn-primary" onclick="doAddEvent()">เพิ่ม</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: note -->
+<div class="overlay" id="m-note">
+  <div class="modal">
+    <div class="modal-title">📝 บันทึกใหม่</div>
+    <div class="input-group"><label>หัวข้อ</label><input class="gl-input" id="n-title" placeholder="ชื่อบันทึก..."></div>
+    <div class="input-group"><label>เนื้อหา</label><textarea class="gl-input" id="n-body" rows="5" placeholder="เขียนบันทึก..."></textarea></div>
+    <div class="input-group"><label>หมวดหมู่</label>
+      <div class="tag-sel">
+        <button class="tag-btn sel" onclick="setTag(this,'general')">ทั่วไป</button>
+        <button class="tag-btn" onclick="setTag(this,'travel')">การเดินทาง</button>
+        <button class="tag-btn" onclick="setTag(this,'food')">อาหาร</button>
+        <button class="tag-btn" onclick="setTag(this,'shopping')">ชอปปิ้ง</button>
+        <button class="tag-btn" onclick="setTag(this,'concert')">คอนเสิร์ต</button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeM('m-note')">ยกเลิก</button>
+      <button class="btn btn-primary" onclick="saveNote()">บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: add expense -->
+<div class="overlay" id="m-exp">
+  <div class="modal">
+    <div class="modal-title" id="m-exp-title">เพิ่มค่าใช้จ่าย</div>
+    <input type="hidden" id="exp-ei">
+    <div class="input-group"><label>วัน</label>
+      <select class="gl-input" id="exp-day">
+        <option value="ก่อนทริป">ก่อนทริป</option>
+        <option value="22 เม.ย.">22 เม.ย.</option><option value="23 เม.ย.">23 เม.ย.</option>
+        <option value="24 เม.ย.">24 เม.ย.</option><option value="25 เม.ย.">25 เม.ย.</option>
+        <option value="26 เม.ย.">26 เม.ย.</option><option value="27 เม.ย.">27 เม.ย.</option>
+        <option value="28 เม.ย.">28 เม.ย.</option>
+      </select>
+    </div>
+    <div class="input-group"><label>รายการ</label><input class="gl-input" id="exp-name" placeholder="ชื่อรายการ..."></div>
+    <div class="input-group"><label>หมวด</label>
+      <select class="gl-input" id="exp-cat">
+        <option value="flight">เที่ยวบิน</option><option value="hotel">โรงแรม</option>
+        <option value="food">อาหาร/คาเฟ่</option><option value="transit">เดินทาง</option>
+        <option value="entry">ค่าเข้าสถานที่</option><option value="concert">คอนเสิร์ต</option>
+        <option value="other">อื่นๆ</option>
+      </select>
+    </div>
+    <div class="input-group"><label>จำนวน ¥/คน</label><input class="gl-input" type="number" id="exp-amt" placeholder="0"></div>
+    <div class="input-group"><label>หมายเหตุ</label><input class="gl-input" id="exp-note" placeholder="..."></div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" id="exp-del" onclick="delExp()" style="display:none;">ลบ</button>
+      <button class="btn btn-ghost" onclick="closeM('m-exp')">ยกเลิก</button>
+      <button class="btn btn-primary" onclick="saveExp()">บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════ DATA FROM EXCEL ════════════
+const TL = {flight:'เที่ยวบิน',transit:'เดินทาง',run:'วิ่ง',bath:'อาบน้ำ',cafe:'คาเฟ่',food:'อาหาร',shop:'ชอปปิ้ง',museum:'พิพิธภัณฑ์',art:'ศิลปะ',concert:'คอนเสิร์ต',hotel:'โรงแรม'};
+
+const DEFAULT_DAYS = [
+  {date:22,day:'พุธ',theme:'วันแรก — JL708 Check-in Tower Records',events:[
+    {time:'07:55',type:'flight',name:'JL708 ออกจากสุวรรณภูมิ',note:'04:00 ออกจากที่พัก (ประตู 8 แถว R)',price:null,origin:'สุวรรณภูมิ (BKK)',line:'JAL Boeing 787 Direct',transfer:'—',dest:'Narita T2 (TYO)',hnote:'~6h10m'},
+    {time:'16:05',type:'transit',name:'ผ่านด่านตม. + รับกระเป๋า',note:'~50-60 นาที',price:null,origin:'Narita T2',line:'—',transfer:'—',dest:'—',hnote:''},
+    {time:'17:05',type:'transit',name:'NEX Narita → Shinagawa',note:'ตรงไม่เปลี่ยน ~60 min',price:3070,origin:'Narita T2',line:'Narita Express (NEX)',transfer:'—',dest:'Shinagawa',hnote:'¥3,070/คน'},
+    {time:'18:05',type:'transit',name:'เปลี่ยน JR Yamanote → Ebisu',note:'2 stops ~5 min',price:null,origin:'Shinagawa',line:'JR Yamanote (สีเขียว) ฝั่ง Shibuya',transfer:'—',dest:'Ebisu',hnote:''},
+    {time:'18:12',type:'transit',name:'เปลี่ยน Hibiya Line → Roppongi',note:'2 stops ~4 min',price:null,origin:'Ebisu (H02)',line:'Hibiya Line (สีเทา) ฝั่ง Kita-senju',transfer:'—',dest:'Roppongi (H04)',hnote:''},
+    {time:'18:30',type:'hotel',name:'Check-in Remm Roppongi',note:'Booking 6479118381 22-25 เม.ย.',price:null,origin:'H04 Roppongi',line:'— เดิน ~5 min',transfer:'—',dest:'Remm Roppongi',hnote:''},
+    {time:'19:30',type:'shop',name:'Tower Records Shibuya',note:'เปิดถึง 23:00',price:null,origin:'Roppongi (E23)',line:'Oedo Line (สีม่วง) ฝั่ง Shinjuku',transfer:'E24 Aoyama-itchome → เปลี่ยน Ginza Line (สีส้ม)',dest:'Shibuya (G01)',hnote:'2 stops รวม ~10 min ¥220/คน'},
+    {time:'20:30',type:'food',name:'Nikuya Yokocho Shibuya',note:'ตึก HULIC &New UDAGAWA ชั้น 8 เดิน ~8 min',price:12000,origin:'Tower Records',line:'— เดิน ~8 min',transfer:'—',dest:'Nikuya Yokocho',hnote:'จองแล้ว 20:30'}
+  ]},
+  {date:23,day:'พฤหัส',theme:'Mori Art + Omotesando + Shibuya',events:[
+    {time:'07:00',type:'run',name:'วิ่ง Roppongi Loop',note:'~4-5 km',price:null,origin:'รร. Remm Roppongi',line:'— เดินออก',transfer:'—',dest:'Mori Garden / Aoyama Cemetery',hnote:''},
+    {time:'08:30',type:'cafe',name:'Common Cafe Nishi-Azabu',note:'8:00-23:00',price:1000,origin:'H04 Roppongi',line:'Hibiya Line ฝั่ง Nakameguro',transfer:'—',dest:'H03 Hiroo → เดิน ~10 min',hnote:''},
+    {time:'10:30',type:'museum',name:'Mori Art Museum ชั้น 53',note:'¥2,000/คน ออนไลน์ ¥1,800',price:2000,origin:'รร. Remm Roppongi',line:'— เดิน ~500 ม.',transfer:'—',dest:'Mori Tower ชั้น 53',hnote:''},
+    {time:'13:30',type:'food',name:'Kaiten Sushi Ginza Onodera',note:'Exit A1 หรือ B5 ซอย BOSS ~¥3,000-4,000/คน',price:4000,origin:'Omotesando',line:'— Exit A1 หรือ B5',transfer:'—',dest:'Kaiten Sushi (Omotesando)',hnote:''},
+    {time:'14:30',type:'shop',name:'Omotesando & Cat Street / Harajuku',note:'',price:null,origin:'Hiroo (H03)',line:'Hibiya Line ฝั่ง Nakameguro',transfer:'H02 Ebisu → JR Yamanote → Shibuya → Ginza Line',dest:'Omotesando (G02)',hnote:'~15 min หรือเดิน ~25 min'},
+    {time:'17:30',type:'shop',name:'Parco Shibuya',note:'Nintendo Tokyo ชั้น 6',price:null,origin:'Omotesando (G02)',line:'Ginza Line (สีส้ม) ฝั่ง Shibuya',transfer:'—',dest:'Shibuya (G01)',hnote:'1 stop ~2 min'},
+    {time:'19:30',type:'food',name:'Shabu-shabu Onyasai Shibuya',note:'ใกล้ Tower Record',price:null,origin:'—',line:'— อยู่ใน Shibuya',transfer:'—',dest:'Shibuya',hnote:''},
+    {time:'21:30',type:'transit',name:'กลับ รร.',note:'',price:null,origin:'Shibuya (G01)',line:'Ginza Line (สีส้ม) ฝั่ง Asakusa',transfer:'G04 Aoyama-itchome → เปลี่ยน Oedo Line (สีม่วง)',dest:'Roppongi (E23)',hnote:'~10 min ¥220/คน'}
+  ]},
+  {date:24,day:'ศุกร์',theme:'Imperial Palace + Ueno + SKAC Kameari',events:[
+    {time:'07:00',type:'transit',name:'ไปวิ่ง Roppongi → Hibiya',note:'4 stops ~8 min',price:null,origin:'Roppongi (H04)',line:'Hibiya Line (สีเทา) ฝั่ง Kita-senju',transfer:'—',dest:'Hibiya (H07)',hnote:''},
+    {time:'07:15',type:'run',name:'วิ่ง Imperial Palace Loop ~5 km',note:'มีป้ายบอกทาง',price:null,origin:'H07 Hibiya',line:'— เดิน ~5 min',transfer:'—',dest:'Imperial Palace Loop',hnote:''},
+    {time:'08:30',type:'cafe',name:'Glitch Coffee & Roasters (Kanda/Jinbocho)',note:'เปิด 08:00 วันธรรมดา ใกล้ประตู Takebashi',price:null,origin:'Imperial Palace',line:'— เดิน',transfer:'—',dest:'Glitch Coffee Kanda',hnote:''},
+    {time:'09:00',type:'transit',name:'กลับ รร.',note:'3 stops ~6 min',price:null,origin:'Hibiya (H07)',line:'Hibiya Line ฝั่ง Nakameguro',transfer:'—',dest:'Roppongi (H04)',hnote:''},
+    {time:'10:45',type:'museum',name:'National Museum of Western Art',note:'UNESCO 13 stops ~25 min ¥500/คน',price:280,origin:'Roppongi (H04)',line:'Hibiya Line (สีเทา) ฝั่ง Kita-senju',transfer:'—',dest:'Ueno (H17)',hnote:'¥280/คน รถไฟ'},
+    {time:'14:00',type:'art',name:'SKAC Kameari Art Centre',note:'เปิด 11:00-19:00 ปิดจันทร์-อังคาร ฟรี เดิน ~12 min',price:null,origin:'Ueno (JR)',line:'JR Joban Line ⚠ Local เท่านั้น',transfer:'—',dest:'Kameari',hnote:'7 stops ~22 min Rapid ไม่จอด!'},
+    {time:'19:00',type:'food',name:'Sushi Kappou Roppongi Kicko',note:'18:00-23:00',price:null,origin:'Kameari',line:'JR Joban Local → เปลี่ยน',transfer:'—',dest:'Roppongi',hnote:''}
+  ]},
+  {date:25,day:'เสาร์',theme:'aespa Tokyo Dome Day 1 🎤',events:[
+    {time:'07:00',type:'run',name:'วิ่งแถว Roppongi (Arisugawa Park)',note:'',price:null,origin:'รร. Remm Roppongi',line:'— เดินออก',transfer:'—',dest:'Arisugawa Park',hnote:''},
+    {time:'09:00',type:'cafe',name:'Verve Coffee Roasters',note:'',price:1000,origin:'Arisugawa Park',line:'— เดิน',transfer:'—',dest:'Verve Roppongi',hnote:''},
+    {time:'11:30',type:'food',name:'Tsujihan Tokyo Midtown (Nihonbashi)',note:'คิว 30-60 นาที',price:null,origin:'—',line:'—',transfer:'—',dest:'Tokyo Midtown',hnote:''},
+    {time:'12:30',type:'concert',name:'aespa Tokyo Dome — Day 1 🌸',note:'เดิน ~3 min ถึง Dome ไม่รวมค่าตั๋ว',price:null,origin:'Roppongi (H04)',line:'Hibiya Line (สีเทา) ฝั่ง Kita-senju',transfer:'Hibiya (H07) → เปลี่ยน Mita Line (I07) ฝั่ง Nishi-takashimadaira',dest:'Suidobashi (I10)',hnote:'6 stops รวม ~15 min'},
+    {time:'22:30',type:'transit',name:'กลับ รร. (หลัง concert)',note:'คนเยอะ รอ 1-2 ขบวน',price:null,origin:'Suidobashi (I10)',line:'Mita Line (สีน้ำเงิน) ฝั่ง Meguro',transfer:'Hibiya (I07) → เปลี่ยน Hibiya Line (H07) ฝั่ง Nakameguro',dest:'Roppongi (H04)',hnote:'6 stops รวม ~15 min'},
+    {time:'23:30',type:'food',name:'Afuri Roppongi Crossing Gate',note:'11:00-23:00',price:null,origin:'— เดินจากสถานี',line:'—',transfer:'—',dest:'Afuri Roppongi',hnote:''}
+  ]},
+  {date:26,day:'อาทิตย์',theme:'aespa Tokyo Dome Day 2 🎤',events:[
+    {time:'07:00',type:'run',name:'วิ่งแถว Roppongi',note:'',price:null,origin:'รร. Remm Roppongi',line:'— เดินออก',transfer:'—',dest:'เส้นวิ่งแถว Roppongi',hnote:''},
+    {time:'09:00',type:'cafe',name:'Blue Bottle Coffee Roppongi',note:'เดิน ~7 min จาก รร.',price:null,origin:'รร. Remm Roppongi',line:'— เดิน ~7 min',transfer:'—',dest:'Roppongi Hills area',hnote:''},
+    {time:'11:30',type:'concert',name:'aespa Tokyo Dome — Day 2 🌸',note:'เดิน ~3 min ถึง Dome ไม่รวมค่าตั๋ว',price:null,origin:'Roppongi (H04)',line:'Hibiya Line (สีเทา) ฝั่ง Kita-senju',transfer:'Hibiya (H07) → เปลี่ยน Mita Line (I07) ฝั่ง Nishi-takashimadaira',dest:'Suidobashi (I10)',hnote:'6 stops รวม ~15 min'},
+    {time:'20:30',type:'food',name:'Taketora Ramen (Menshou Taketora)',note:'เปิด 24 ชม. เดินจาก รร. ไม่ไกล',price:null,origin:'Suidobashi (I10)',line:'Mita Line ฝั่ง Meguro',transfer:'Hibiya (I07) → เปลี่ยน Hibiya Line (H07) ฝั่ง Nakameguro',dest:'Roppongi (H04)',hnote:'6 stops รวม ~15 min'}
+  ]},
+  {date:27,day:'จันทร์',theme:'Daikanyama + Nakameguro + Ginza Sand',events:[
+    {time:'07:00',type:'run',name:'วิ่ง Roppongi → Daikanyama ~5 km',note:'ผ่าน Hiroo → Ebisu → Daikanyama',price:null,origin:'รร. Remm Roppongi',line:'— วิ่งออก',transfer:'—',dest:'Daikanyama (ริม Meguro River)',hnote:''},
+    {time:'09:00',type:'cafe',name:'Verve Ebisu Garden Place [Day 5]',note:'2 stops ~4 min กลับ รร.',price:null,origin:'Ebisu (H02)',line:'Hibiya Line (สีเทา) ฝั่ง Kita-senju',transfer:'—',dest:'Roppongi (H04)',hnote:''},
+    {time:'10:30',type:'shop',name:'Daikanyama T-Site + Nakameguro',note:'เดิน ~10 min → Daikanyama',price:null,origin:'Roppongi (H04)',line:'Hibiya Line (สีเทา) ฝั่ง Nakameguro',transfer:'—',dest:'Nakameguro (H01)',hnote:'3 stops ~7 min'},
+    {time:'16:00',type:'shop',name:'ชอปปิ้ง Shibuya / Harajuku',note:'',price:null,origin:'—',line:'— อยู่ใน Shibuya',transfer:'—',dest:'Shibuya / Harajuku',hnote:''},
+    {time:'16:00',type:'food',name:'Ginza Sand (แซนวิชเนื้อ)',note:'17:00-04:00',price:null,origin:'Shibuya (G01)',line:'Ginza Line (สีส้ม) ฝั่ง Asakusa',transfer:'—',dest:'Ginza (G09)',hnote:'8 stops ~15 min'},
+    {time:'19:00',type:'food',name:'หาร้านข้าวกิน',note:'',price:null,origin:'—',line:'—',transfer:'—',dest:'—',hnote:''},
+    {time:'21:00',type:'shop',name:'Don Quijote Roppongi — ของฝาก',note:'เปิด 24 ชม.',price:null,origin:'Ginza (H08)',line:'Hibiya Line (สีเทา) ฝั่ง Nakameguro',transfer:'—',dest:'Roppongi (H04)',hnote:'4 stops ~8 min'}
+  ]},
+  {date:28,day:'อังคาร',theme:'วันกลับ JL707 18:25',events:[
+    {time:'07:30',type:'cafe',name:'Bricolage Bread & Co. (อาหารเช้า)',note:'เดิน ~5 min จาก รร.',price:null,origin:'รร. Remm Roppongi',line:'— เดิน ~5 min',transfer:'—',dest:'Bricolage Roppongi',hnote:''},
+    {time:'09:00',type:'shop',name:'Don Quijote Roppongi — ของฝาก',note:'เปิด 24 ชม.',price:null,origin:'รร. Remm Roppongi',line:'— เดิน ~3 min',transfer:'—',dest:'Don Quijote Roppongi',hnote:''},
+    {time:'12:00',type:'hotel',name:'Checkout (Booking 5049632821)',note:'25-28 เม.ย.',price:null,origin:'—',line:'—',transfer:'—',dest:'Remm Roppongi',hnote:''},
+    {time:'12:30',type:'transit',name:'รถตู้ → Narita T2',note:'~70 km ~70-90 min ถึง ~14:00',price:null,origin:'Remm Roppongi',line:'รถตู้ส่วนตัว',transfer:'—',dest:'Narita Terminal 2',hnote:''},
+    {time:'18:25',type:'flight',name:'JL707 ออกจาก Narita T2',note:'6h35m ถึง BKK 23:00',price:null,origin:'Narita T2',line:'JAL Boeing 787 Direct',transfer:'—',dest:'สุวรรณภูมิ (BKK)',hnote:''}
+  ]}
+];
+
+const RESTAURANTS = [
+  // ── ☕ CAFE ──
+  {cat:'cafe', name:'Verve Coffee Roasters Roppongi', area:'Roppongi', hrs:'07:00-21:00', price:'¥700-900', transit:'เดิน ~5 min จาก รร.', note:'Latte Valencia (Tokyo exclusive) · Honey Rosemary Latte'},
+  {cat:'cafe', name:'Bricolage Bread & Co.', area:'Roppongi', hrs:'08:00-21:00', price:'¥1,000-1,500', transit:'เดิน ~5 min จาก รร.', note:'Artisan bread + specialty coffee โดย Kenji Kojima'},
+  {cat:'cafe', name:'Blue Bottle Coffee', area:'Roppongi Hills', hrs:'08:00-20:00', price:'¥700-1,000', transit:'เดิน ~7 min จาก รร.', note:'Single-origin pour over · minimal design'},
+  {cat:'cafe', name:'Common Cafe', area:'Nishi-Azabu', hrs:'08:00-23:00', price:'¥700-1,000', transit:'H04 → H03 Hiroo [Hibiya] เดิน ~10 min', note:'Specialty coffee + bistro · expat favorite'},
+  {cat:'cafe', name:'Glitch Coffee & Roasters', area:'Kanda / Jinbocho', hrs:'08:00-19:00', price:'¥800-1,200', transit:'H07 Hibiya → H04 ฝั่ง Nakameguro แล้วนั่งต่อ | ใกล้ Imperial Palace run', note:'15 varieties single-origin light roast · world-class'},
+  {cat:'cafe', name:'Fuglen Tokyo', area:'Tomigaya (Shibuya)', hrs:'08:00-01:00', price:'¥700-1,000', transit:'E23 → Yoyogi-koen [Oedo] เดิน ~5 min', note:'Oslo coffee shop · กลางคืนเป็น cocktail bar · vintage furniture'},
+  {cat:'cafe', name:'Verve Coffee Roasters Ebisu', area:'Ebisu Garden Place', hrs:'08:00-20:00', price:'¥700-900', transit:'H04 → H02 Ebisu [Hibiya · 2 stops]', note:'สาขา Ebisu · บรรยากาศ garden'},
+  {cat:'cafe', name:'Sarutahiko Coffee', area:'Ebisu', hrs:'08:00-22:00', price:'¥600-900', transit:'H04 → H02 Ebisu [Hibiya · 2 stops]', note:'Dark roast creamy · latte art สวยมาก · rustic atmosphere'},
+  // ── 🍣 SUSHI ──
+  {cat:'sushi', name:'Kaiten Sushi Ginza Onodera', area:'Omotesando', hrs:'10:30-22:30', price:'¥3,000-4,000', transit:'E23 → E24 Aoyama-itchome ⇄ G04 → G02 Omotesando [Ginza]', note:'Kaiten sushi premium · วัตถุดิบสดมาก · Exit A1 ซอย BOSS'},
+  {cat:'sushi', name:'Sushi Kappou Roppongi Kicko', area:'Roppongi', hrs:'18:00-23:00', price:'¥8,000-15,000', transit:'เดิน ~5 min จาก รร.', note:'Sushi omakase course · จองล่วงหน้าแนะนำ'},
+  {cat:'sushi', name:'Nihonbashi Kaisen Donburi Tsujihan', area:'Tokyo Midtown (Roppongi)', hrs:'11:00-20:30', price:'¥2,000-3,000', transit:'เดิน ~5 min จาก รร.', note:'ข้าวหน้าปลาดิบ signature · คิว 30-60 นาที'},
+  {cat:'sushi', name:'Umegaoka Sushi Midori (梅丘 寿司の美登利)', area:'Shibuya / Ginza / Shinjuku', hrs:'11:00-22:00', price:'¥2,500-4,000', transit:'G01 Shibuya หรือ G09 Ginza', note:'Value omakase · fresh + generous sets · หลายสาขา'},
+  // ── 🥩 YAKINIKU / เนื้อย่าง ──
+  {cat:'yakiniku', name:'Nikuya Yokocho Udagawacho', area:'Shibuya', hrs:'17:00-00:30', price:'¥3,000-5,000', transit:'E23 → E24 ⇄ G04 → G01 Shibuya [Ginza] ~10 min', note:'จองแล้ว 20:30 · ตึก HULIC &New UDAGAWA ชั้น 8 เดิน ~8 min'},
+  {cat:'yakiniku', name:'Ginza Sand (แซนวิชเนื้อ)', area:'Ginza', hrs:'17:00-04:00', price:'¥2,500-4,000', transit:'H04 → H08 Ginza [Hibiya · 4 stops ~8 min]', note:'Wagyu Katsu Sando ชื่อดัง · เปิดดึกมาก'},
+  {cat:'yakiniku', name:'Yoroniku Roppongi', area:'Roppongi', hrs:'17:00-24:00', price:'¥12,000-20,000', transit:'เดิน ~8 min จาก รร.', note:'Premium A5 Wagyu yakiniku · Shabu-yaki signature · high-end'},
+  // ── 🍲 SHABU / SUKIYAKI ──
+  {cat:'shabu', name:'Shabuzen Roppongi', area:'Roppongi', hrs:'17:00-23:00', price:'¥4,000-8,000', transit:'เดิน ~5 min จาก รร.', note:'Matsusaka + Wagyu beef · private rooms · all-you-can-eat option'},
+  {cat:'shabu', name:'Shabu-shabu Onyasai Shibuya', area:'Shibuya', hrs:'16:00-23:30', price:'¥3,000-5,000', transit:'E23 → E24 ⇄ G04 → G01 Shibuya [Ginza] ~10 min', note:'Organic vegetables · หลายสาขา · ใกล้ Tower Records'},
+  {cat:'shabu', name:'Nabezo Shibuya', area:'Shibuya', hrs:'11:00-23:00', price:'¥3,500-6,000', transit:'G01 Shibuya เดิน ~3 min (เหนือ Disney Store)', note:'All-you-can-eat buffet · Wagyu + Kobe beef · 8 broths 29 sauces'},
+  // ── 🍜 RAMEN ──
+  {cat:'ramen', name:'Afuri Roppongi Crossing Gate', area:'Roppongi', hrs:'11:00-23:00', price:'¥900-1,400', transit:'เดิน ~3 min จาก รร.', note:'Yuzu Shio Ramen signature · chicken dashi broth · light & fragrant'},
+  {cat:'ramen', name:'Taketora Ramen (Menshou Taketora)', area:'Roppongi', hrs:'24 ชม.', price:'¥1,000-1,500', transit:'เดิน ~5 min จาก รร.', note:'เปิด 24 ชม. · perfect หลัง concert · rich broth'},
+  {cat:'ramen', name:'Fuunji', area:'Shinjuku (Yoyogi)', hrs:'11:00-21:00', price:'¥1,000-1,500', transit:'E23 → Yoyogi [Oedo] เดิน ~5 min', note:'Tsukemen (dipping noodles) ชื่อดัง · คิวยาวไปก่อนเปิด'},
+];
+
+// ── STATE ──
+let days = JSON.parse(localStorage.getItem('days_v5')||'null') || JSON.parse(JSON.stringify(DEFAULT_DAYS));
+let notes = JSON.parse(localStorage.getItem('notes_v5')||'[]');
+let qrSlots = JSON.parse(localStorage.getItem('qr_v5')||JSON.stringify([
+  {name:'Visit Japan (1)',hint:'QR จาก VJW',img:null},{name:'Visit Japan (2)',hint:'QR จาก VJW',img:null},
+  {name:'Boarding Pass ขาไป',hint:'JL708 22 เม.ย.',img:null},{name:'Boarding Pass ขากลับ',hint:'JL707 28 เม.ย.',img:null},
+  {name:'Booking รร. (1)',hint:'6479118381',img:null},{name:'Booking รร. (2)',hint:'5049632821',img:null}
+]));
+const DEFAULT_EXP = [
+  {day:'ก่อนทริป',name:'ตั๋วเครื่องบิน JAL JL708+JL707',cat:'flight',amt:99335,note:'฿39,190 / 2 คน = ¥99,335/คน'},
+  {day:'ก่อนทริป',name:'Remm Roppongi 22-25 เม.ย.',cat:'hotel',amt:41515,note:'Booking 6479118381 ¥83,030 รวม'},
+  {day:'ก่อนทริป',name:'Remm Roppongi 25-28 เม.ย.',cat:'hotel',amt:28842,note:'Booking 5049632821 ¥57,684 รวม'},
+  {day:'22 เม.ย.',name:'NEX Narita → Shinagawa',cat:'transit',amt:3070,note:''},
+  {day:'22 เม.ย.',name:'Nikuya Yokocho Shibuya',cat:'food',amt:12000,note:'จองแล้ว'},
+  {day:'23 เม.ย.',name:'Common Cafe Nishi-Azabu',cat:'food',amt:1000,note:''},
+  {day:'23 เม.ย.',name:'Mori Art Museum',cat:'entry',amt:2000,note:'¥2,000/คน'},
+  {day:'23 เม.ย.',name:'Kaiten Sushi Ginza Onodera',cat:'food',amt:4000,note:'~¥3,000-4,000/คน'},
+  {day:'24 เม.ย.',name:'National Museum of Western Art',cat:'entry',amt:280,note:'¥280/คน รถไฟรวม'},
+  {day:'24 เม.ย.',name:'SKAC Kameari (เข้าฟรี)',cat:'entry',amt:0,note:'ฟรี'},
+  {day:'25 เม.ย.',name:'Verve Coffee Roasters',cat:'food',amt:1000,note:''},
+];
+let expenses = JSON.parse(localStorage.getItem('exp_v5')||'null')||JSON.parse(JSON.stringify(DEFAULT_EXP));
+let expFilter = 'all';
+let selTag = 'general';
+let editNoteIdx = -1;
+let transportFilter = 'all';
+
+function saveDays(){localStorage.setItem('days_v5',JSON.stringify(days));}
+function saveNotes(){localStorage.setItem('notes_v5',JSON.stringify(notes));}
+function saveQR(){localStorage.setItem('qr_v5',JSON.stringify(qrSlots));}
+function saveExpenses(){localStorage.setItem('exp_v5',JSON.stringify(expenses));}
+
+// ── NAV ──
+function showPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='diary')renderNotes();
+  if(id==='shopping')renderShopProgress();
+  if(id==='documents'){renderQR();updateVJW();}
+  if(id==='transport')renderTransport();
+  if(id==='restaurants')renderRestaurants();
+  if(id==='expense')renderExpense();
+}
+
+// ── DAYS ──
+function renderDays(){
+  const c=document.getElementById('days-container');
+  c.innerHTML='';
+  const dayThemes=['วันแรก','Mori Art','Ueno+SKAC','Dome Day 1','Dome Day 2','Daikanyama','วันกลับ'];
+  days.forEach((d,di)=>{
+    const card=document.createElement('div');
+    card.className='card day-card';
+    card.style.animationDelay=(di*.04)+'s';
+    const cost = d.events.filter(e=>e.price).reduce((s,e)=>s+(e.price||0),0);
+    const costStr = cost>0 ? '~¥'+cost.toLocaleString() : '';
+    const hd=document.createElement('div');
+    hd.className='day-hd';
+    hd.innerHTML=`<div class="day-num">${d.date}</div>
+      <div class="day-info"><div class="day-title">${d.day} ${d.date} เมษายน</div>
+      <div class="day-sub">${d.theme}</div></div>
+      ${costStr?`<div class="day-badge">${costStr}</div>`:''}
+      <div class="day-chevron" id="chv${di}">▾</div>`;
+    hd.onclick=()=>toggleDay(di);
+    const body=document.createElement('div');
+    body.className='day-body';body.id='db'+di;
+    d.events.forEach((ev,ei)=>{
+      const row=document.createElement('div');row.className='ev';
+      const hasRoute=ev.origin&&ev.origin!=='—'&&ev.line&&ev.line!=='—'&&ev.line!=='— เดินออก'&&ev.line!=='— วิ่งออก';
+      const hasXfer=ev.transfer&&ev.transfer!=='—';
+      row.innerHTML=`
+        <div class="ev-time">${ev.time||''}</div>
+        <div class="ev-badge-wrap"><span class="badge b-${ev.type}">${TL[ev.type]||ev.type}</span></div>
+        <div class="ev-body">
+          <div class="ev-name">${ev.name}${ev.price?`<span class="price-tag">¥${ev.price.toLocaleString()}</span>`:''}</div>
+          ${ev.note?`<div class="ev-note">${ev.note}</div>`:''}
+          ${hasRoute?`<div class="ev-route">
+            <span style="color:var(--sage);font-weight:600;">${ev.origin}</span>
+            → [${ev.line}]
+            ${hasXfer?`<span class="xfer"> ⇄ ${ev.transfer}</span>`:''}
+            → <span style="color:var(--sakura-dk);font-weight:600;">${ev.dest}</span>
+            ${ev.hnote?`<br><span style="color:var(--tx3);">${ev.hnote}</span>`:''}
+          </div>`:''}
+        </div>
+        <button class="ev-edit" onclick="openEditEv(${di},${ei})">✎</button>`;
+      body.appendChild(row);
+    });
+    const addRow=document.createElement('div');addRow.style.cssText='padding:8px 14px;border-top:1px solid rgba(242,167,195,.1);';
+    const addBtn=document.createElement('button');addBtn.className='btn btn-ghost';addBtn.style.cssText='font-size:11px;padding:5px 12px;';addBtn.textContent='+ เพิ่มรายการ';
+    addBtn.onclick=e=>{e.stopPropagation();openAddEv(di);};
+    addRow.appendChild(addBtn);body.appendChild(addRow);
+    card.appendChild(hd);card.appendChild(body);c.appendChild(card);
+  });
+}
+function toggleDay(di){
+  document.getElementById('db'+di).classList.toggle('open');
+  document.getElementById('chv'+di).classList.toggle('open');
+}
+
+// ── EDIT / ADD EVENT ──
+function openEditEv(di,ei){
+  const ev=days[di].events[ei];
+  document.getElementById('e-di').value=di;document.getElementById('e-ei').value=ei;
+  document.getElementById('e-time').value=ev.time||'';document.getElementById('e-name').value=ev.name;
+  document.getElementById('e-note').value=ev.note||'';document.getElementById('e-type').value=ev.type;
+  document.getElementById('e-price').value=ev.price||'';
+  openM('m-event');
+}
+function saveEvent(){
+  const di=+document.getElementById('e-di').value,ei=+document.getElementById('e-ei').value;
+  const ev=days[di].events[ei];
+  ev.time=document.getElementById('e-time').value;ev.name=document.getElementById('e-name').value;
+  ev.note=document.getElementById('e-note').value;ev.type=document.getElementById('e-type').value;
+  ev.price=+document.getElementById('e-price').value||null;
+  saveDays();renderDays();reopen(di);closeM('m-event');
+}
+function delEvent(){
+  const di=+document.getElementById('e-di').value,ei=+document.getElementById('e-ei').value;
+  days[di].events.splice(ei,1);saveDays();renderDays();reopen(di);closeM('m-event');
+}
+function openAddEv(di){
+  document.getElementById('a-di').value=di;
+  ['a-time','a-name','a-note'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('a-type').value='food';openM('m-add');
+}
+function doAddEvent(){
+  const di=+document.getElementById('a-di').value;
+  days[di].events.push({time:document.getElementById('a-time').value||'--:--',name:document.getElementById('a-name').value||'รายการใหม่',note:document.getElementById('a-note').value,type:document.getElementById('a-type').value,price:null,origin:'—',line:'—',transfer:'—',dest:'—',hnote:''});
+  saveDays();renderDays();reopen(di);closeM('m-add');
+}
+function reopen(di){setTimeout(()=>{document.getElementById('db'+di).classList.add('open');document.getElementById('chv'+di).classList.add('open');},30);}
+
+// ── TRANSPORT TABLE ──
+function renderTransport(){
+  const tbody=document.getElementById('transport-tbody');
+  if(!tbody)return;
+  tbody.innerHTML='';
+  const filterWrap=document.getElementById('transport-day-filter');
+  if(filterWrap&&!filterWrap.children.length){
+    const allBtn=document.createElement('button');
+    allBtn.className='filter-btn active';allBtn.textContent='ทั้งหมด';
+    allBtn.onclick=()=>{transportFilter='all';document.querySelectorAll('#transport-day-filter .filter-btn').forEach(b=>b.classList.remove('active'));allBtn.classList.add('active');renderTransport();};
+    filterWrap.appendChild(allBtn);
+    days.forEach(d=>{
+      const btn=document.createElement('button');btn.className='filter-btn';
+      btn.textContent=d.date+' เม.ย.';
+      btn.onclick=()=>{transportFilter=d.date;document.querySelectorAll('#transport-day-filter .filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderTransport();};
+      filterWrap.appendChild(btn);
+    });
+  }
+  days.forEach(d=>{
+    if(transportFilter!=='all'&&d.date!==transportFilter)return;
+    d.events.forEach((ev,i)=>{
+      const hasRoute=ev.origin&&ev.origin!=='—';
+      if(!hasRoute&&!ev.line||ev.line==='—')return;
+      const tr=document.createElement('tr');
+      const hasXfer=ev.transfer&&ev.transfer!=='—';
+      tr.innerHTML=`
+        <td><div style="font-size:10px;color:var(--tx3);font-family:'DM Mono',monospace;">${d.date} เม.ย.</div><div style="font-size:11px;color:var(--tx2);">${ev.time||''}</div></td>
+        <td><span class="badge b-${ev.type}" style="margin-right:4px;">${TL[ev.type]||ev.type}</span><span style="font-size:12px;">${ev.name}</span></td>
+        <td class="td-origin">${ev.origin||'—'}</td>
+        <td class="td-line">${ev.line||'—'}</td>
+        <td class="${hasXfer?'td-transfer':'no-transit'}">${hasXfer?ev.transfer:'—'}</td>
+        <td class="td-dest">${ev.dest||'—'}</td>
+        <td class="td-note">${ev.hnote||''}</td>`;
+      tbody.appendChild(tr);
+    });
+  });
+}
+
+// ── RESTAURANTS ──
+function renderRestaurants(filter){
+  filter = filter || 'all';
+  const g=document.getElementById('rest-grid');if(!g)return;
+  g.innerHTML='';
+  const catLabel={cafe:'☕ คาเฟ่',sushi:'🍣 ซูชิ',yakiniku:'🥩 เนื้อย่าง',shabu:'🍲 ชาบู / สุกี้',ramen:'🍜 ราเมน'};
+  const catColor={cafe:'rgba(210,140,80,.15)',sushi:'rgba(100,160,220,.15)',yakiniku:'rgba(220,80,80,.12)',shabu:'rgba(80,140,200,.12)',ramen:'rgba(200,100,50,.12)'};
+  const catBorder={cafe:'rgba(210,140,80,.35)',sushi:'rgba(100,160,220,.35)',yakiniku:'rgba(220,80,80,.3)',shabu:'rgba(80,140,200,.3)',ramen:'rgba(200,100,50,.3)'};
+
+  // Filter buttons
+  const fw = document.getElementById('rest-filter-wrap');
+  if(fw && !fw.children.length){
+    const cats = ['all','cafe','sushi','yakiniku','shabu','ramen'];
+    const catNames = {all:'ทั้งหมด',cafe:'☕ คาเฟ่',sushi:'🍣 ซูชิ',yakiniku:'🥩 เนื้อย่าง',shabu:'🍲 ชาบู',ramen:'🍜 ราเมน'};
+    cats.forEach(cat=>{
+      const btn=document.createElement('button');
+      btn.className='filter-btn' + (cat==='all'?' active':'');
+      btn.textContent=catNames[cat];
+      btn.onclick=()=>{
+        document.querySelectorAll('#rest-filter-wrap .filter-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        renderRestaurants(cat);
+      };
+      fw.appendChild(btn);
+    });
+  }
+
+  const filtered = filter==='all' ? RESTAURANTS : RESTAURANTS.filter(r=>r.cat===filter);
+  filtered.forEach((r,i)=>{
+    const card=document.createElement('div');
+    card.className='card rest-card';
+    card.style.animationDelay=(i*.04)+'s';
+    card.style.borderTop='3px solid ' + (catBorder[r.cat]||'var(--border)');
+    card.style.background = catColor[r.cat]||'';
+    card.innerHTML=`
+      <div class="rest-type">${catLabel[r.cat]||r.cat}</div>
+      <div class="rest-name">${r.name}</div>
+      <div class="rest-area">📍 ${r.area}</div>
+      ${r.hrs?`<div class="rest-hrs">🕐 ${r.hrs}</div>`:''}
+      ${r.price?`<div class="rest-hrs" style="color:var(--mustard-dk);">💴 ${r.price}/คน</div>`:''}
+      ${r.transit?`<div class="rest-hrs" style="color:var(--sage);font-family:'DM Mono',monospace;font-size:10.5px;margin-top:3px;">🚇 ${r.transit}</div>`:''}
+      ${r.note?`<div class="rest-note">✦ ${r.note}</div>`:''}`;
+    g.appendChild(card);
+  });
+}
+
+// ── EXPENSE ──
+const CAT_NAME={flight:'เที่ยวบิน',hotel:'โรงแรม',food:'อาหาร/คาเฟ่',transit:'เดินทาง',entry:'ค่าเข้า',concert:'คอนเสิร์ต',other:'อื่นๆ'};
+const CAT_COLORS={flight:'#9944CC',hotel:'#3A7A2A',food:'#D4708A',transit:'#4A8A4A',entry:'#2266AA',concert:'#BB2255',other:'#6644AA'};
+function renderExpense(){
+  const filtered=expFilter==='all'?expenses:expenses.filter(e=>e.cat===expFilter);
+  const total=expenses.reduce((s,e)=>s+Number(e.amt),0);
+  const sumEl=document.getElementById('exp-summary');
+  if(sumEl){
+    const cats=['flight','hotel','food','transit','entry','concert','other'];
+    const totByCat={};cats.forEach(c=>{totByCat[c]=expenses.filter(e=>e.cat===c).reduce((s,e)=>s+Number(e.amt),0);});
+    sumEl.innerHTML=`
+      <div class="card exp-card"><div class="exp-label">รวมทั้งหมด</div><div class="exp-val">¥${total.toLocaleString()}</div><div class="exp-sub">ต่อคน</div></div>
+      <div class="card exp-card"><div class="exp-label">เที่ยวบิน+รร.</div><div class="exp-val">¥${(totByCat.flight+totByCat.hotel).toLocaleString()}</div><div class="exp-sub">fixed</div></div>
+      <div class="card exp-card"><div class="exp-label">อาหาร/คาเฟ่</div><div class="exp-val">¥${totByCat.food.toLocaleString()}</div><div class="exp-sub">7 วัน</div></div>
+      <div class="card exp-card"><div class="exp-label">เดินทาง</div><div class="exp-val">¥${totByCat.transit.toLocaleString()}</div><div class="exp-sub">รถไฟ</div></div>
+      <div class="card exp-card"><div class="exp-label">ค่าเข้า</div><div class="exp-val">¥${totByCat.entry.toLocaleString()}</div><div class="exp-sub">พิพิธภัณฑ์</div></div>`;
+  }
+  const barsEl=document.getElementById('exp-bars');
+  if(barsEl&&total>0){
+    barsEl.innerHTML=['flight','hotel','food','transit','entry','concert','other'].map(cat=>{
+      const amt=expenses.filter(e=>e.cat===cat).reduce((s,e)=>s+Number(e.amt),0);
+      if(!amt)return'';
+      const pct=Math.round(amt/total*100);
+      return`<div class="bar-wrap"><div class="bar-label">${CAT_NAME[cat]}</div><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${CAT_COLORS[cat]};"></div></div><div class="bar-val">¥${amt.toLocaleString()} (${pct}%)</div></div>`;
+    }).join('');
+  }
+  const fw=document.getElementById('exp-filter-wrap');
+  if(fw&&!fw.children.length){
+    const ab=document.createElement('button');ab.className='filter-btn active';ab.textContent='ทั้งหมด';
+    ab.onclick=()=>{expFilter='all';document.querySelectorAll('#exp-filter-wrap .filter-btn').forEach(b=>b.classList.remove('active'));ab.classList.add('active');renderExpense();};
+    fw.appendChild(ab);
+    Object.keys(CAT_NAME).forEach(cat=>{
+      const btn=document.createElement('button');btn.className='filter-btn';btn.textContent=CAT_NAME[cat];
+      btn.onclick=()=>{expFilter=cat;document.querySelectorAll('#exp-filter-wrap .filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderExpense();};
+      fw.appendChild(btn);
+    });
+  }
+  const tbody=document.getElementById('exp-tbody');if(!tbody)return;
+  tbody.innerHTML='';
+  if(!filtered.length){tbody.innerHTML='<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--tx3);">ยังไม่มีรายการ</td></tr>';return;}
+  filtered.forEach((e,i)=>{
+    const ri=expenses.indexOf(e);
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td style="font-size:11px;font-family:'DM Mono',monospace;color:var(--tx3);">${e.day}</td>
+      <td><div style="font-size:12.5px;font-weight:500;">${e.name}</div>${e.note?`<div style="font-size:10px;color:var(--tx3);">${e.note}</div>`:''}</td>
+      <td><span class="cat-pill c-${e.cat}">${CAT_NAME[e.cat]||e.cat}</span></td>
+      <td style="text-align:right;font-family:'DM Mono',monospace;font-size:12px;color:var(--mustard-dk);">¥${Number(e.amt).toLocaleString()}</td>
+      <td><button class="ev-edit" onclick="openEditExp(${ri})">✎</button></td>`;
+    tbody.appendChild(tr);
+  });
+}
+function openAddExp(){
+  document.getElementById('exp-ei').value='-1';document.getElementById('m-exp-title').textContent='เพิ่มค่าใช้จ่าย';
+  document.getElementById('exp-day').value='22 เม.ย.';document.getElementById('exp-name').value='';
+  document.getElementById('exp-cat').value='food';document.getElementById('exp-amt').value='';
+  document.getElementById('exp-note').value='';document.getElementById('exp-del').style.display='none';
+  openM('m-exp');
+}
+function openEditExp(idx){
+  const e=expenses[idx];
+  document.getElementById('exp-ei').value=idx;document.getElementById('m-exp-title').textContent='แก้ไข';
+  document.getElementById('exp-day').value=e.day;document.getElementById('exp-name').value=e.name;
+  document.getElementById('exp-cat').value=e.cat;document.getElementById('exp-amt').value=e.amt;
+  document.getElementById('exp-note').value=e.note||'';document.getElementById('exp-del').style.display='';
+  openM('m-exp');
+}
+function saveExp(){
+  const idx=+document.getElementById('exp-ei').value;
+  const item={day:document.getElementById('exp-day').value,name:document.getElementById('exp-name').value||'รายการ',cat:document.getElementById('exp-cat').value,amt:+document.getElementById('exp-amt').value||0,note:document.getElementById('exp-note').value};
+  if(idx>=0)expenses[idx]=item;else expenses.push(item);
+  saveExpenses();renderExpense();closeM('m-exp');
+}
+function delExp(){const idx=+document.getElementById('exp-ei').value;if(idx>=0&&confirm('ลบ?')){expenses.splice(idx,1);saveExpenses();renderExpense();closeM('m-exp');}}
+
+// ── PROFILE / DOCS / QR ──
+function saveProfile(){
+  const ids=['t1-name','t1-passport','t1-expiry','t1-phone','t2-name','t2-passport','t2-expiry','t2-phone','vjw1','vjw2','hotel-addr','hotel-tel','embassy','emergency'];
+  const d={};ids.forEach(id=>{const el=document.getElementById(id);if(el)d[id]=el.value;});
+  localStorage.setItem('profile_v5',JSON.stringify(d));
+}
+function loadProfile(){
+  const d=JSON.parse(localStorage.getItem('profile_v5')||'{}');
+  Object.entries(d).forEach(([id,val])=>{const el=document.getElementById(id);if(el)el.value=val;});
+  updateVJW();
+}
+function updateVJW(){
+  const v1=document.getElementById('vjw1')?.value||'—',v2=document.getElementById('vjw2')?.value||'—';
+  const d1=document.getElementById('vjw-d1'),d2=document.getElementById('vjw-d2');
+  if(d1)d1.textContent=v1||'—';if(d2)d2.textContent=v2||'—';
+}
+function saveDocs(){
+  const ids=['doc-flight','doc-h1','doc-h2','doc-ins','doc-note'];
+  const d={};ids.forEach(id=>{const el=document.getElementById(id);if(el)d[id]=el.value;});
+  localStorage.setItem('docs_v5',JSON.stringify(d));
+  const btn=event.currentTarget;btn.textContent='✓ บันทึกแล้ว';setTimeout(()=>btn.textContent='บันทึก',1800);
+}
+function loadDocs(){
+  const d=JSON.parse(localStorage.getItem('docs_v5')||'{}');
+  Object.entries(d).forEach(([id,val])=>{const el=document.getElementById(id);if(el)el.value=val;});
+}
+function renderQR(){
+  const g=document.getElementById('qr-grid');if(!g)return;
+  g.innerHTML='';
+  qrSlots.forEach((s,i)=>{
+    const div=document.createElement('div');div.className='card qr-slot';
+    div.innerHTML=`<div class="qr-preview" onclick="document.getElementById('qf${i}').click()">${s.img?`<img src="${s.img}">`:'🌸'}</div>
+      <div class="qr-lbl" contenteditable="true" onblur="qrSlots[${i}].name=this.textContent.trim();saveQR();">${s.name}</div>
+      <div class="qr-hint">${s.hint}</div>
+      <input type="file" id="qf${i}" accept="image/*" onchange="uploadQR(${i},this)">
+      <button onclick="removeQR(${i})" style="background:none;border:none;color:var(--tx3);cursor:pointer;font-size:10px;margin-top:3px;font-family:'Sarabun',sans-serif;">✕ ลบ</button>`;
+    g.appendChild(div);
+  });
+}
+function uploadQR(i,inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{qrSlots[i].img=e.target.result;saveQR();renderQR();};r.readAsDataURL(f);}
+function removeQR(i){if(confirm('ลบ?')){qrSlots.splice(i,1);saveQR();renderQR();}}
+function addQR(){qrSlots.push({name:'QR ใหม่',hint:'แตะเพื่ออัปโหลด',img:null});saveQR();renderQR();}
+
+// ── DIARY ──
+function openNote(){
+  editNoteIdx=-1;document.getElementById('n-title').value='';document.getElementById('n-body').value='';
+  selTag='general';document.querySelectorAll('.tag-btn').forEach((b,i)=>b.classList.toggle('sel',i===0));
+  openM('m-note');
+}
+function setTag(btn,tag){selTag=tag;document.querySelectorAll('.tag-btn').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');}
+function saveNote(){
+  const title=document.getElementById('n-title').value.trim()||'บันทึก';
+  const body=document.getElementById('n-body').value.trim();
+  const dateStr=new Date().toLocaleDateString('th-TH',{day:'2-digit',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'});
+  if(editNoteIdx>=0)notes[editNoteIdx]={...notes[editNoteIdx],title,body,tag:selTag};
+  else notes.unshift({title,body,tag:selTag,date:dateStr,id:Date.now()});
+  saveNotes();renderNotes();closeM('m-note');
+}
+function renderNotes(){
+  const c=document.getElementById('notes-wrap'),nn=document.getElementById('no-notes');
+  if(!c)return;c.innerHTML='';
+  if(!notes.length){if(nn)nn.style.display='block';return;}
+  if(nn)nn.style.display='none';
+  const tname={general:'ทั่วไป',travel:'การเดินทาง',food:'อาหาร',shopping:'ชอปปิ้ง',concert:'คอนเสิร์ต'};
+  notes.forEach((n,i)=>{
+    const card=document.createElement('div');card.className='card note-card';card.style.animationDelay=(i*.04)+'s';
+    card.innerHTML=`<div class="note-date">${n.date}</div>
+      <div class="note-title-row"><div class="note-title">${n.title}</div>
+      <div style="display:flex;gap:5px;"><button class="btn btn-ghost" style="padding:4px 10px;font-size:11px;" onclick="editNote(${i})">แก้ไข</button><button class="btn btn-danger" onclick="delNote(${i})">ลบ</button></div></div>
+      <div class="note-body">${n.body}</div>
+      <span class="nt-tag ${n.tag}">${tname[n.tag]||n.tag}</span>`;
+    c.appendChild(card);
+  });
+}
+function editNote(i){editNoteIdx=i;const n=notes[i];document.getElementById('n-title').value=n.title;document.getElementById('n-body').value=n.body;selTag=n.tag||'general';document.querySelectorAll('.tag-btn').forEach(b=>{const t=b.getAttribute('onclick').match(/'([^']+)'/)?.[1];b.classList.toggle('sel',t===selTag);});openM('m-note');}
+function delNote(i){if(confirm('ลบ?')){notes.splice(i,1);saveNotes();renderNotes();}}
+
+// ── MODAL ──
+function openM(id){document.getElementById(id).classList.add('open');}
+function closeM(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
+
+
+// ── SHOPPING ──
+function toggleShop(no, cb) {
+  const row = document.getElementById('shoprow-' + no);
+  if (row) row.classList.toggle('checked', cb.checked);
+  const checked = JSON.parse(localStorage.getItem('shop_v5') || '[]');
+  if (cb.checked) { if (!checked.includes(no)) checked.push(no); }
+  else { const i = checked.indexOf(no); if (i > -1) checked.splice(i, 1); }
+  localStorage.setItem('shop_v5', JSON.stringify(checked));
+  renderShopProgress();
+}
+function renderShopProgress() {
+  const checked = JSON.parse(localStorage.getItem('shop_v5') || '[]');
+  const total = 30;
+  const done = checked.length;
+  const pct = Math.round(done / total * 100);
+  const fill = document.getElementById('shop-prog-fill');
+  const txt = document.getElementById('shop-prog-text');
+  if (fill) fill.style.width = pct + '%';
+  if (txt) txt.textContent = done + ' / ' + total;
+  // restore checkboxes
+  checked.forEach(no => {
+    const row = document.getElementById('shoprow-' + no);
+    if (row) {
+      row.classList.add('checked');
+      const cb = row.querySelector('input[type=checkbox]');
+      if (cb) cb.checked = true;
+    }
+  });
+}
+function resetShop() {
+  if (!confirm('รีเซ็ตการเช็คทั้งหมด?')) return;
+  localStorage.removeItem('shop_v5');
+  document.querySelectorAll('[id^=shoprow-]').forEach(row => {
+    row.classList.remove('checked');
+    const cb = row.querySelector('input[type=checkbox]');
+    if (cb) cb.checked = false;
+  });
+  renderShopProgress();
+}
+
+// ── INIT ──
+renderDays();
+loadProfile();
+loadDocs();
+renderQR();
+</script>
+</body>
+</html>
